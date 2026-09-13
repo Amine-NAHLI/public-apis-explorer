@@ -10,7 +10,7 @@ const outDir = path.resolve(__dirname, '../src/data');
 const outPath = path.resolve(outDir, 'apis.json');
 
 const content = fs.readFileSync(mdPath, 'utf-8');
-const lines = content.split('\n');
+const lines = content.split(/\r?\n/);
 
 const apis = [];
 let currentCategory = '';
