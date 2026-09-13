@@ -4,6 +4,8 @@ import { useState, useMemo, useEffect } from 'react';
 import { Search, ExternalLink, Shield, Check, Globe, Moon, Sun, Heart, Code2, Copy, X, Sparkles, Tag, Key, Lock, ChevronRight, HelpCircle, Dices, ArrowDownAZ, ArrowUpZA } from 'lucide-react';
 import { getAllApis, getCategories, searchApis, ApiEntry } from '@/lib/api-service';
 import { useTheme } from 'next-themes';
+import { motion, AnimatePresence } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
@@ -60,6 +62,11 @@ export default function Home() {
   }, [filteredApis, page]);
 
   const totalPages = Math.ceil(filteredApis.length / itemsPerPage);
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => setPage(1), [query, category, auth, cors, https, sortOrder, showBookmarksOnly]);
 
@@ -134,7 +141,12 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10"></div>
 
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16"
+        >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-neutral-900/50 backdrop-blur-sm mb-8">
             <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
             <span className="text-[13px] font-medium text-neutral-600 dark:text-neutral-300">1,742 APIs Indexed & Verified</span>
@@ -149,7 +161,7 @@ export default function Home() {
           <p className="text-[17px] text-neutral-500 dark:text-neutral-400 max-w-2xl text-balance">
             Integrate the best public APIs into your next project. Zero friction, instant search, and unified specifications.
           </p>
-        </div>
+        </motion.div>
 
         {/* Search & Random Bar */}
         <div className="max-w-4xl mx-auto mb-12 flex items-center gap-3">
@@ -170,13 +182,15 @@ export default function Home() {
               </button>
             )}
           </div>
-          <button 
+          <motion.button 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={handleRandomApi}
             title="Surprise me with a random API"
             className="flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-xl bg-white dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 text-neutral-500 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors shadow-sm"
           >
             <Dices className="h-6 w-6" />
-          </button>
+          </motion.button>
         </div>
 
         {/* Filters Bar */}
@@ -220,66 +234,77 @@ export default function Home() {
         </div>
 
         {/* API Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-          {paginatedApis.map((api, idx) => {
-            const isBookmarked = bookmarks.has(api.name);
-            return (
-            <div key={idx} className="group flex flex-col bg-white dark:bg-[#0a0a0a] rounded-xl p-5 border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-all duration-300 relative">
-              
-              <div className="flex items-start justify-between mb-3">
-                <div className="flex flex-col">
-                  <a href={api.link} target="_blank" rel="noreferrer" className="text-[16px] font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-black dark:group-hover:text-white transition-colors flex items-center gap-1.5">
-                    {api.name}
-                    <ExternalLink className="w-3.5 h-3.5 text-neutral-400 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-                  </a>
-                  <span className="text-[13px] text-neutral-500 mt-0.5">{api.category}</span>
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+          <AnimatePresence mode="popLayout">
+            {paginatedApis.map((api, idx) => {
+              const isBookmarked = bookmarks.has(api.name);
+              return (
+              <motion.div 
+                key={api.name}
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                whileHover={{ y: -4, transition: { duration: 0.2, delay: 0 } }}
+                transition={{ duration: 0.3, delay: idx * 0.05 }}
+                className="group flex flex-col bg-white dark:bg-[#0a0a0a] rounded-xl p-5 border border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors relative"
+              >
+                
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex flex-col">
+                    <a href={api.link} target="_blank" rel="noreferrer" className="text-[16px] font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-black dark:group-hover:text-white transition-colors flex items-center gap-1.5">
+                      {api.name}
+                      <ExternalLink className="w-3.5 h-3.5 text-neutral-400 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                    </a>
+                    <span className="text-[13px] text-neutral-500 mt-0.5">{api.category}</span>
+                  </div>
+                  <button onClick={() => toggleBookmark(api.name)} className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
+                    <Heart className={`w-4 h-4 ${isBookmarked ? 'fill-current text-neutral-900 dark:text-white' : ''}`} />
+                  </button>
                 </div>
-                <button onClick={() => toggleBookmark(api.name)} className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
-                  <Heart className={`w-4 h-4 ${isBookmarked ? 'fill-current text-neutral-900 dark:text-white' : ''}`} />
-                </button>
-              </div>
 
-              <p className="text-[14px] text-neutral-600 dark:text-neutral-400 line-clamp-2 mb-6 h-[42px] leading-relaxed">
-                {api.description}
-              </p>
-              
-              <div className="flex items-center gap-2 mt-auto">
-                {api.auth.toLowerCase() === 'no' ? (
-                  <span className="inline-flex items-center px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 text-[11px] font-medium border border-neutral-200 dark:border-neutral-800">
-                    Free
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 text-[11px] font-medium border border-neutral-200 dark:border-neutral-800">
-                    Auth
-                  </span>
-                )}
-                {api.https.toLowerCase() === 'yes' && (
-                  <span className="inline-flex items-center px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 text-[11px] font-medium border border-neutral-200 dark:border-neutral-800">
-                    HTTPS
-                  </span>
-                )}
-                <div className="flex-1"></div>
-                <button
-                  onClick={() => setSelectedApi(api)}
-                  className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 bg-neutral-900 dark:bg-white text-white dark:text-black text-[12px] font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                  <Code2 className="w-3.5 h-3.5" /> Snippet
-                </button>
-              </div>
-            </div>
-          )})}
-        </div>
+                <p className="text-[14px] text-neutral-600 dark:text-neutral-400 line-clamp-2 mb-6 h-[42px] leading-relaxed">
+                  {api.description}
+                </p>
+                
+                <div className="flex items-center gap-2 mt-auto">
+                  {api.auth.toLowerCase() === 'no' ? (
+                    <span className="inline-flex items-center px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 text-[11px] font-medium border border-neutral-200 dark:border-neutral-800">
+                      Free
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 text-[11px] font-medium border border-neutral-200 dark:border-neutral-800">
+                      Auth
+                    </span>
+                  )}
+                  {api.https.toLowerCase() === 'yes' && (
+                    <span className="inline-flex items-center px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 text-[11px] font-medium border border-neutral-200 dark:border-neutral-800">
+                      HTTPS
+                    </span>
+                  )}
+                  <div className="flex-1"></div>
+                  <button
+                    onClick={() => setSelectedApi(api)}
+                    className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 bg-neutral-900 dark:bg-white text-white dark:text-black text-[12px] font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <Code2 className="w-3.5 h-3.5" /> Snippet
+                  </button>
+                </div>
+              </motion.div>
+            )})}
+          </AnimatePresence>
+        </motion.div>
         
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex justify-center items-center gap-4 mt-8">
-            <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} className="p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-500 hover:text-neutral-900 dark:hover:text-white disabled:opacity-30 transition-colors">
+            <button onClick={() => handlePageChange(Math.max(1, page - 1))} disabled={page === 1} className="p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-500 hover:text-neutral-900 dark:hover:text-white disabled:opacity-30 transition-colors">
               <ChevronRight className="w-5 h-5 rotate-180" />
             </button>
             <span className="text-[14px] font-medium text-neutral-500">
               {page} <span className="text-neutral-300 dark:text-neutral-700">/</span> {totalPages}
             </span>
-            <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages} className="p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-500 hover:text-neutral-900 dark:hover:text-white disabled:opacity-30 transition-colors">
+            <button onClick={() => handlePageChange(Math.min(totalPages, page + 1))} disabled={page === totalPages} className="p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-500 hover:text-neutral-900 dark:hover:text-white disabled:opacity-30 transition-colors">
               <ChevronRight className="w-5 h-5" />
             </button>
           </div>
@@ -287,22 +312,44 @@ export default function Home() {
       </main>
 
       {/* Advanced Snippet Modal */}
-      {selectedApi && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-white/50 dark:bg-black/50 backdrop-blur-sm" onClick={() => setSelectedApi(null)}>
-          <div className="bg-white dark:bg-[#0a0a0a] rounded-xl max-w-2xl w-full shadow-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden" onClick={e => e.stopPropagation()}>
-            <div className="px-6 py-5 border-b border-neutral-200 dark:border-neutral-800 flex justify-between items-center bg-[#FAFAFA] dark:bg-[#0a0a0a]">
-              <h3 className="text-[16px] font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
-                <Code2 className="w-4 h-4 text-neutral-500" /> Integrate {selectedApi.name}
-              </h3>
-              <button onClick={() => setSelectedApi(null)} className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"><X className="w-4 h-4"/></button>
-            </div>
+      <AnimatePresence>
+        {selectedApi && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-white/50 dark:bg-black/50 backdrop-blur-sm" 
+            onClick={() => setSelectedApi(null)}
+          >
+            <motion.div 
+              initial={{ y: 20, scale: 0.95 }}
+              animate={{ y: 0, scale: 1 }}
+              exit={{ y: 20, scale: 0.95 }}
+              className="bg-white dark:bg-[#0a0a0a] rounded-xl max-w-2xl w-full shadow-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden" 
+              onClick={e => e.stopPropagation()}
+            >
+              <div className="px-6 py-5 border-b border-neutral-200 dark:border-neutral-800 flex justify-between items-center bg-[#FAFAFA] dark:bg-[#0a0a0a]">
+                <h3 className="text-[16px] font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
+                  <Code2 className="w-4 h-4 text-neutral-500" /> Integrate {selectedApi.name}
+                </h3>
+                <button onClick={() => setSelectedApi(null)} className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"><X className="w-4 h-4"/></button>
+              </div>
 
-            {/* Detailed Description */}
-            <div className="px-6 py-4 bg-white dark:bg-[#0a0a0a]">
-              <p className="text-[14px] text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                {selectedApi.detailedDescription || selectedApi.description}
-              </p>
-            </div>
+              {/* Detailed Description */}
+              <div className="px-6 py-4 bg-white dark:bg-[#0a0a0a]">
+                <div className="text-[14px] text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                  <ReactMarkdown
+                    components={{
+                      ul: ({node, ...props}) => <ul className="list-disc pl-5 space-y-1.5 my-2" {...props} />,
+                      strong: ({node, ...props}) => <strong className="font-semibold text-neutral-900 dark:text-neutral-200" {...props} />,
+                      a: ({node, ...props}) => <a className="text-blue-500 hover:underline" target="_blank" rel="noreferrer" {...props} />,
+                      p: ({node, ...props}) => <p className="mb-2 last:mb-0" {...props} />
+                    }}
+                  >
+                    {selectedApi.detailedDescription || selectedApi.description}
+                  </ReactMarkdown>
+                </div>
+              </div>
             
             {/* Language Tabs */}
             <div className="flex border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#050505] px-2 pt-2 gap-1 overflow-x-auto">
@@ -330,9 +377,10 @@ export default function Home() {
                 </button>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
+      </AnimatePresence>
 
       {/* Help Modal */}
       {showHelpModal && (
