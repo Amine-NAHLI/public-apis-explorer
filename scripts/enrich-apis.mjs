@@ -109,11 +109,23 @@ async function run() {
     // Diviser le batch (ex: 20) en sous-lots (ex: 4 lots de 5)
     const subBatchSize = Math.ceil(batch.length / CONCURRENT_REQUESTS);
     const promises = [];
+    let completedSlots = 0;
     
     for (let j = 0; j < CONCURRENT_REQUESTS; j++) {
       const subBatch = batch.slice(j * subBatchSize, (j + 1) * subBatchSize);
       if (subBatch.length > 0) {
-        promises.push(generateDescriptionsSubBatch(subBatch));
+        const promise = generateDescriptionsSubBatch(subBatch)
+          .then(res => {
+            completedSlots++;
+            console.log(`  ➔ [Progression] Thread ${j+1} terminé ! (${completedSlots}/${promises.length} terminés)`);
+            return res;
+          })
+          .catch(err => {
+            completedSlots++;
+            console.log(`  ➔ [Erreur] Thread ${j+1} a échoué ! (${completedSlots}/${promises.length} terminés)`);
+            return [];
+          });
+        promises.push(promise);
       }
     }
 
