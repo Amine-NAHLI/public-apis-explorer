@@ -17,6 +17,7 @@ export default function Home() {
   const [cors, setCors] = useState('All');
   const [https, setHttps] = useState('All');
   const [sortOrder, setSortOrder] = useState<'none' | 'asc' | 'desc'>('none');
+  const [appLanguage, setAppLanguage] = useState<'en' | 'fr'>('en');
   
   const [bookmarks, setBookmarks] = useState<Set<string>>(new Set());
   const [showBookmarksOnly, setShowBookmarksOnly] = useState(false);
@@ -137,6 +138,9 @@ export default function Home() {
           </nav>
 
           <div className="flex items-center gap-3">
+            <button onClick={() => setAppLanguage(appLanguage === 'en' ? 'fr' : 'en')} className="flex items-center justify-center w-8 h-8 rounded-md bg-neutral-100 dark:bg-neutral-800 text-[12px] font-bold text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors">
+              {appLanguage.toUpperCase()}
+            </button>
             <button onClick={() => setShowHelpModal(true)} className="p-1.5 text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
               <HelpCircle className="w-4 h-4" />
             </button>
@@ -276,7 +280,7 @@ export default function Home() {
                 </div>
 
                 <p className="text-[14px] text-neutral-600 dark:text-neutral-400 line-clamp-2 mb-6 h-[42px] leading-relaxed">
-                  {api.description}
+                  {appLanguage === 'fr' && (api as any).description_fr ? (api as any).description_fr : api.description}
                 </p>
                 
                 <div className="flex items-center gap-2 mt-auto">
@@ -373,7 +377,9 @@ export default function Home() {
                         p: ({node, ...props}) => <p className="mb-4 last:mb-0" {...props} />
                       }}
                     >
-                      {selectedApi.detailedDescription || selectedApi.description}
+                      {appLanguage === 'fr' && (selectedApi as any).detailedDescription_fr 
+                        ? (selectedApi as any).detailedDescription_fr 
+                        : (selectedApi.detailedDescription || selectedApi.description)}
                     </ReactMarkdown>
                   </div>
                 </div>
