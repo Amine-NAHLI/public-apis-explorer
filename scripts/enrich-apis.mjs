@@ -10,8 +10,9 @@ const jsonPath = path.resolve(__dirname, '../src/data/apis.json');
 const AI_ENDPOINT = process.env.AI_ENDPOINT || 'http://127.0.0.1:8080/v1/chat/completions';
 const MODEL_NAME = process.env.MODEL_NAME || 'gemma3';
 
-const BATCH_SIZE_AI = 20; // On envoie 20 par 20 à l'IA pour ne pas faire exploser sa mémoire/casser le JSON
-const PAUSE_EVERY = 100;  // On fait une pause tous les 100 pour demander à l'utilisateur
+const BATCH_SIZE_TOTAL = 20; // Nombre d'APIs traitées par "tour"
+const CONCURRENT_REQUESTS = 4; // Nombre de slots dans llama.cpp
+const PAUSE_EVERY = 100;
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -29,26 +30,31 @@ try {
   process.exit(1);
 }
 
-// Function to call AI with a batch of APIs
-async function generateDescriptionsBatch(apiBatch) {
-  const simplifiedBatch = apiBatch.map(api => ({
+// Function to call AI with a SMALL sub-batch
+async function generateDescriptionsSubBatch(subBatch) {
+  if (subBatch.length === 0) return [];
+
+  const simplifiedBatch = subBatch.map(api => ({
     name: api.name,
     category: api.category,
     description: api.description
   }));
 
   const prompt = `You are a technical writer for a developer directory.
-I will give you a JSON array of ${apiBatch.length} APIs. 
+I will give you a JSON array of ${subBatch.length} APIs. 
 For EACH API, write a highly professional, detailed 2-sentence description explaining exactly what it does, what data it returns, and a use case.
 
 Input APIs:
 ${JSON.stringify(simplifiedBatch, null, 2)}
 
 IMPORTANT INSTRUCTIONS:
-1. You MUST return ONLY a valid JSON array.
-2. The JSON array must contain exactly ${apiBatch.length} objects.
-3. Each object must have exactly two keys: "name" (exactly as provided) and "detailedDescription".
-4. Do NOT include markdown blocks like \`\`\`json. Just output the raw JSON array.`;
+1. You MUST return ONLY a valid JSON object with a single key "apis" containing an array of exactly ${subBatch.length} objects.
+2. Example output format:
+{
+  "apis": [
+    { "name": "API Name Here", "detailedDescription": "Description here..." }
+  ]
+}`;
 
   try {
     const response = await fetch(AI_ENDPOINT, {
@@ -57,7 +63,8 @@ IMPORTANT INSTRUCTIONS:
       body: JSON.stringify({
         model: MODEL_NAME,
         messages: [{ role: 'user', content: prompt }],
-        temperature: 0.2
+        temperature: 0.2,
+        response_format: { type: "json_object" } // Force le format JSON strict (Nécessite llama.cpp récent)
       })
     });
 
@@ -66,22 +73,18 @@ IMPORTANT INSTRUCTIONS:
     const data = await response.json();
     let content = data.choices[0].message.content.trim();
     
-    // Nettoyage au cas où l'IA ajoute des balises markdown ```json ... ```
-    content = content.replace(/^```json/i, '').replace(/^```/i, '').replace(/```$/i, '').trim();
-
     const parsedResponse = JSON.parse(content);
-    return parsedResponse;
+    return parsedResponse.apis || [];
   } catch (err) {
-    console.error(`\n❌ Erreur de génération/parsing pour ce lot:`, err.message);
-    return null;
+    console.error(`\n❌ Erreur de génération/parsing pour un sous-lot:`, err.message);
+    return [];
   }
 }
 
 async function run() {
   console.log(`\n🤖 IA: ${MODEL_NAME} | Endpoint: ${AI_ENDPOINT}`);
-  console.log(`🚀 Démarrage du traitement par lot (Batch) pour ${apis.length} APIs...`);
+  console.log(`🚀 Démarrage du traitement asynchrone (${CONCURRENT_REQUESTS} slots en parallèle)...`);
   
-  // Filtrer uniquement celles qui n'ont pas encore de description détaillée
   const pendingApis = apis.filter(api => !api.detailedDescription);
   console.log(`📊 Il reste ${pendingApis.length} APIs à traiter.\n`);
 
@@ -92,33 +95,47 @@ async function run() {
 
   let sessionProcessedCount = 0;
 
-  for (let i = 0; i < pendingApis.length; i += BATCH_SIZE_AI) {
+  for (let i = 0; i < pendingApis.length; i += BATCH_SIZE_TOTAL) {
     // PAUSE TOUS LES 100
     if (sessionProcessedCount > 0 && sessionProcessedCount % PAUSE_EVERY === 0) {
       fs.writeFileSync(jsonPath, JSON.stringify(apis, null, 2));
       console.log(`\n💾 Sauvegarde effectuée ! Progression : ${apis.length - pendingApis.length + sessionProcessedCount} / ${apis.length}`);
-      await askQuestion(`\n🛑 PAUSE (${sessionProcessedCount} APIs traitées durant cette session). Appuie sur ENTRÉE pour continuer les 100 suivantes...`);
+      await askQuestion(`\n🛑 PAUSE (${sessionProcessedCount} APIs traitées durant cette session). Appuie sur ENTRÉE pour continuer...`);
     }
 
-    const batch = pendingApis.slice(i, i + BATCH_SIZE_AI);
-    console.log(`⏳ Envoi d'un lot de ${batch.length} APIs à l'IA... (${i + 1} à ${Math.min(i + BATCH_SIZE_AI, pendingApis.length)} sur ${pendingApis.length})`);
+    const batch = pendingApis.slice(i, i + BATCH_SIZE_TOTAL);
+    console.log(`⏳ Envoi d'un lot de ${batch.length} APIs réparti sur ${CONCURRENT_REQUESTS} threads simultanés...`);
     
-    const results = await generateDescriptionsBatch(batch);
+    // Diviser le batch (ex: 20) en sous-lots (ex: 4 lots de 5)
+    const subBatchSize = Math.ceil(batch.length / CONCURRENT_REQUESTS);
+    const promises = [];
     
-    if (results && Array.isArray(results)) {
-      // Fusionner les résultats avec la base de données principale
-      for (const res of results) {
+    for (let j = 0; j < CONCURRENT_REQUESTS; j++) {
+      const subBatch = batch.slice(j * subBatchSize, (j + 1) * subBatchSize);
+      if (subBatch.length > 0) {
+        promises.push(generateDescriptionsSubBatch(subBatch));
+      }
+    }
+
+    // Exécuter toutes les requêtes EN MÊME TEMPS
+    const subBatchResults = await Promise.all(promises);
+    
+    // Aplatir les résultats
+    const allResults = subBatchResults.flat();
+
+    let successCount = 0;
+    if (allResults && allResults.length > 0) {
+      for (const res of allResults) {
         const apiIndex = apis.findIndex(a => a.name === res.name && !a.detailedDescription);
-        if (apiIndex !== -1) {
+        if (apiIndex !== -1 && res.detailedDescription) {
           apis[apiIndex].detailedDescription = res.detailedDescription;
+          successCount++;
         }
       }
-      sessionProcessedCount += batch.length;
-      console.log(`✅ Lot réussi ! (+${batch.length})`);
-    } else {
-      console.log(`⚠️ Échec de ce lot, on s'arrête pour éviter de polluer les données.`);
-      break; 
     }
+
+    sessionProcessedCount += batch.length;
+    console.log(`✅ Lot terminé ! (${successCount}/${batch.length} descriptions ajoutées avec succès)`);
   }
 
   fs.writeFileSync(jsonPath, JSON.stringify(apis, null, 2));
