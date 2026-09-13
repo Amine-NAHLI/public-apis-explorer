@@ -27,6 +27,34 @@ export default function Home() {
   const [page, setPage] = useState(1);
   const [snippetLanguage, setSnippetLanguage] = useState<'javascript' | 'python' | 'curl' | 'nodejs' | 'go'>('javascript');
   
+  const t = {
+    directory: appLanguage === 'fr' ? 'Annuaire' : 'Directory',
+    favorites: appLanguage === 'fr' ? 'Favoris' : 'Favorites',
+    indexed: appLanguage === 'fr' ? '1 742 APIs Indexées & Vérifiées' : '1,742 APIs Indexed & Verified',
+    titleMain: appLanguage === 'fr' ? "L'annuaire" : 'The definitive',
+    titleSub: appLanguage === 'fr' ? "API définitif." : 'API directory.',
+    desc: appLanguage === 'fr' ? "Intégrez les meilleures APIs publiques à vos projets. Zéro friction, recherche instantanée et spécifications unifiées." : "Integrate the best public APIs into your next project. Zero friction, instant search, and unified specifications.",
+    search: appLanguage === 'fr' ? "Rechercher des intégrations, catégories ou mots-clés..." : "Search integrations, categories, or keywords...",
+    random: appLanguage === 'fr' ? "Une API au hasard" : "Surprise me with a random API",
+    allCat: appLanguage === 'fr' ? "Toutes les catégories" : "All Categories",
+    authAny: appLanguage === 'fr' ? "Auth : Toutes" : "Auth: Any",
+    authNo: appLanguage === 'fr' ? "Sans Auth" : "No Auth",
+    authYes: appLanguage === 'fr' ? "Auth Requise" : "Auth Required",
+    httpsAny: appLanguage === 'fr' ? "HTTPS : Peu importe" : "HTTPS: Any",
+    httpsYes: appLanguage === 'fr' ? "HTTPS Uniquement" : "HTTPS Only",
+    httpsNo: appLanguage === 'fr' ? "Sans HTTPS" : "No HTTPS",
+    corsAny: appLanguage === 'fr' ? "CORS : Peu importe" : "CORS: Any",
+    corsYes: appLanguage === 'fr' ? "CORS : Oui" : "CORS Yes",
+    corsNo: appLanguage === 'fr' ? "CORS : Non" : "CORS No",
+    corsUnknown: appLanguage === 'fr' ? "CORS : Inconnu" : "CORS Unknown",
+    results: appLanguage === 'fr' ? "résultats" : "results",
+    free: appLanguage === 'fr' ? "Gratuit" : "Free",
+    details: appLanguage === 'fr' ? "Détails" : "Details",
+    snippet: appLanguage === 'fr' ? "Code" : "Snippet",
+    integrate: appLanguage === 'fr' ? "Intégrer" : "Integrate",
+    copy: appLanguage === 'fr' ? "Copier" : "Copy to clipboard"
+  };
+
   const itemsPerPage = 24;
   const categories = useMemo(() => ['All', ...getCategories()], []);
 
@@ -130,10 +158,10 @@ export default function Home() {
           </div>
           
           <nav className="hidden lg:flex items-center gap-6">
-            <button onClick={resetFilters} className={`text-[14px] font-medium transition-colors ${!showBookmarksOnly ? 'text-neutral-900 dark:text-neutral-100' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300'}`}>Directory</button>
+            <button onClick={resetFilters} className={`text-[14px] font-medium transition-colors ${!showBookmarksOnly ? 'text-neutral-900 dark:text-neutral-100' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300'}`}>{t.directory}</button>
             <button onClick={() => setShowBookmarksOnly(!showBookmarksOnly)} className={`text-[14px] font-medium transition-colors flex items-center gap-1.5 ${showBookmarksOnly ? 'text-neutral-900 dark:text-white' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300'}`}>
               <Heart className={`w-4 h-4 ${showBookmarksOnly ? 'fill-current' : ''}`} /> 
-              Favorites {bookmarks.size > 0 && <span className="ml-1 px-1.5 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-[11px] font-mono">{bookmarks.size}</span>}
+              {t.favorites} {bookmarks.size > 0 && <span className="ml-1 px-1.5 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-[11px] font-mono">{bookmarks.size}</span>}
             </button>
           </nav>
 
@@ -165,17 +193,17 @@ export default function Home() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-neutral-900/50 backdrop-blur-sm mb-8">
             <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-            <span className="text-[13px] font-medium text-neutral-600 dark:text-neutral-300">1,742 APIs Indexed & Verified</span>
+            <span className="text-[13px] font-medium text-neutral-600 dark:text-neutral-300">{t.indexed}</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-neutral-900 dark:text-white mb-6 leading-tight">
-            The definitive <br className="hidden sm:block"/>
+            {t.titleMain} <br className="hidden sm:block"/>
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-neutral-900 to-neutral-500 dark:from-white dark:to-neutral-500">
-              API directory.
+              {t.titleSub}
             </span>
           </h1>
           <p className="text-[17px] text-neutral-500 dark:text-neutral-400 max-w-2xl text-balance">
-            Integrate the best public APIs into your next project. Zero friction, instant search, and unified specifications.
+            {t.desc}
           </p>
         </motion.div>
 
@@ -187,7 +215,7 @@ export default function Home() {
             </div>
             <input
               type="text"
-              placeholder="Search integrations, categories, or keywords..."
+              placeholder={t.search}
               className="block w-full pl-12 pr-12 py-4 bg-white dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 rounded-xl text-neutral-900 dark:text-white placeholder:text-neutral-500 focus:outline-none focus:ring-1 focus:ring-neutral-300 dark:focus:ring-neutral-700 transition-all text-[15px] shadow-sm"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -202,7 +230,7 @@ export default function Home() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleRandomApi}
-            title="Surprise me with a random API"
+            title={t.random}
             className="flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-xl bg-white dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 text-neutral-500 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors shadow-sm"
           >
             <Dices className="h-6 w-6" />
@@ -213,26 +241,28 @@ export default function Home() {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 py-4 mb-8 border-b border-neutral-200 dark:border-neutral-900">
           <div className="flex flex-wrap items-center gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar w-full md:w-auto">
             <select className="appearance-none bg-white dark:bg-[#0a0a0a] text-neutral-700 dark:text-neutral-300 text-[13px] font-medium px-3 py-1.5 rounded-md border border-neutral-200 dark:border-neutral-800 focus:outline-none hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors cursor-pointer min-w-[120px]" value={category} onChange={e => setCategory(e.target.value)}>
-              {categories.map(c => <option key={c} value={c}>{c === 'All' ? 'All Categories' : c}</option>)}
+              {categories.map(c => <option key={c} value={c}>{c === 'All' ? t.allCat : c}</option>)}
             </select>
             
             <div className="w-px h-4 bg-neutral-300 dark:bg-neutral-800 mx-1"></div>
 
             <select className="appearance-none bg-white dark:bg-[#0a0a0a] text-neutral-700 dark:text-neutral-300 text-[13px] font-medium px-3 py-1.5 rounded-md border border-neutral-200 dark:border-neutral-800 focus:outline-none hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors cursor-pointer" value={auth} onChange={e => setAuth(e.target.value)}>
-              <option value="All">Auth: Any</option>
-              <option value="No">No Auth</option>
-              <option value="Yes">Requires Auth</option>
+              <option value="All">{t.authAny}</option>
+              <option value="No">{t.authNo}</option>
+              <option value="Yes">{t.authYes}</option>
             </select>
 
             <select className="appearance-none bg-white dark:bg-[#0a0a0a] text-neutral-700 dark:text-neutral-300 text-[13px] font-medium px-3 py-1.5 rounded-md border border-neutral-200 dark:border-neutral-800 focus:outline-none hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors cursor-pointer" value={https} onChange={e => setHttps(e.target.value)}>
-              <option value="All">HTTPS: Any</option>
-              <option value="Yes">HTTPS Only</option>
+              <option value="All">{t.httpsAny}</option>
+              <option value="Yes">{t.httpsYes}</option>
+              <option value="No">{t.httpsNo}</option>
             </select>
 
             <select className="appearance-none bg-white dark:bg-[#0a0a0a] text-neutral-700 dark:text-neutral-300 text-[13px] font-medium px-3 py-1.5 rounded-md border border-neutral-200 dark:border-neutral-800 focus:outline-none hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors cursor-pointer" value={cors} onChange={e => setCors(e.target.value)}>
-              <option value="All">CORS: Any</option>
-              <option value="Yes">CORS Enabled</option>
-              <option value="No">No CORS</option>
+              <option value="All">{t.corsAny}</option>
+              <option value="Yes">{t.corsYes}</option>
+              <option value="No">{t.corsNo}</option>
+              <option value="Unknown">{t.corsUnknown}</option>
             </select>
 
             <div className="w-px h-4 bg-neutral-300 dark:bg-neutral-800 mx-1"></div>
@@ -245,7 +275,7 @@ export default function Home() {
           </div>
           
           <div className="flex items-center text-[13px] text-neutral-500 dark:text-neutral-500 font-medium whitespace-nowrap">
-            {filteredApis.length} results
+            {filteredApis.length} {t.results}
           </div>
         </div>
 
@@ -286,7 +316,7 @@ export default function Home() {
                 <div className="flex items-center gap-2 mt-auto">
                   {api.auth.toLowerCase() === 'no' ? (
                     <span className="inline-flex items-center px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 text-[11px] font-medium border border-neutral-200 dark:border-neutral-800">
-                      Free
+                      {t.free}
                     </span>
                   ) : (
                     <span className="inline-flex items-center px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 text-[11px] font-medium border border-neutral-200 dark:border-neutral-800">
@@ -303,13 +333,13 @@ export default function Home() {
                     onClick={() => { setSelectedApi(api); setModalMode('details'); }}
                     className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white text-[12px] font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity hover:bg-neutral-200 dark:hover:bg-neutral-700"
                   >
-                    <FileText className="w-3.5 h-3.5" /> Details
+                    <FileText className="w-3.5 h-3.5" /> {t.details}
                   </button>
                   <button
                     onClick={() => { setSelectedApi(api); setModalMode('snippet'); }}
                     className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 bg-neutral-900 dark:bg-white text-white dark:text-black text-[12px] font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
                   >
-                    <Code2 className="w-3.5 h-3.5" /> Snippet
+                    <Code2 className="w-3.5 h-3.5" /> {t.snippet}
                   </button>
                 </div>
               </motion.div>
@@ -357,8 +387,8 @@ export default function Home() {
                   </h3>
                   <div className="h-4 w-px bg-neutral-300 dark:bg-neutral-700"></div>
                   <div className="flex bg-neutral-100 dark:bg-neutral-900 p-1 rounded-lg">
-                    <button onClick={() => setModalMode('details')} className={`px-3 py-1 text-[12px] font-medium rounded-md transition-colors ${modalMode === 'details' ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white'}`}>Details</button>
-                    <button onClick={() => setModalMode('snippet')} className={`px-3 py-1 text-[12px] font-medium rounded-md transition-colors ${modalMode === 'snippet' ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white'}`}>Code Snippet</button>
+                    <button onClick={() => setModalMode('details')} className={`px-3 py-1 text-[12px] font-medium rounded-md transition-colors ${modalMode === 'details' ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white'}`}>{t.details}</button>
+                    <button onClick={() => setModalMode('snippet')} className={`px-3 py-1 text-[12px] font-medium rounded-md transition-colors ${modalMode === 'snippet' ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white'}`}>{t.snippet}</button>
                   </div>
                 </div>
                 <button onClick={() => setSelectedApi(null)} className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"><X className="w-4 h-4"/></button>
@@ -408,7 +438,7 @@ export default function Home() {
                       <pre className="bg-[#111] text-neutral-300 p-5 rounded-lg text-[13px] font-mono overflow-x-auto border border-neutral-800">
                         <code>{generateSnippet(selectedApi, snippetLanguage)}</code>
                       </pre>
-                      <button onClick={() => copySnippet(selectedApi)} className="absolute top-3 right-3 p-2 bg-neutral-800 rounded-md text-neutral-400 hover:text-white transition-colors shadow-sm" title="Copy to clipboard">
+                      <button onClick={() => copySnippet(selectedApi)} className="absolute top-3 right-3 p-2 bg-neutral-800 rounded-md text-neutral-400 hover:text-white transition-colors shadow-sm" title={t.copy}>
                         <Copy className="w-4 h-4" />
                       </button>
                     </div>
