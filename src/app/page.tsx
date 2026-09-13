@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
-import { Search, ExternalLink, Shield, Check, Globe, Moon, Sun, Heart, Code2, Copy, X, Sparkles, Tag, Key, Lock, ChevronRight, HelpCircle, Dices, ArrowDownAZ, ArrowUpZA } from 'lucide-react';
+import { Search, ExternalLink, Shield, Check, Globe, Moon, Sun, Heart, Code2, Copy, X, Sparkles, Tag, Key, Lock, ChevronRight, HelpCircle, Dices, ArrowDownAZ, ArrowUpZA, FileText } from 'lucide-react';
 import { getAllApis, getCategories, searchApis, ApiEntry } from '@/lib/api-service';
 import { useTheme } from 'next-themes';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -21,6 +21,7 @@ export default function Home() {
   const [bookmarks, setBookmarks] = useState<Set<string>>(new Set());
   const [showBookmarksOnly, setShowBookmarksOnly] = useState(false);
   const [selectedApi, setSelectedApi] = useState<ApiEntry | null>(null);
+  const [modalMode, setModalMode] = useState<'details' | 'snippet'>('details');
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [page, setPage] = useState(1);
   const [snippetLanguage, setSnippetLanguage] = useState<'javascript' | 'python' | 'curl' | 'nodejs' | 'go'>('javascript');
@@ -68,6 +69,17 @@ export default function Home() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const resetFilters = () => {
+    setQuery('');
+    setCategory('All');
+    setAuth('All');
+    setCors('All');
+    setHttps('All');
+    setSortOrder('none');
+    setShowBookmarksOnly(false);
+    handlePageChange(1);
+  };
+
   useEffect(() => setPage(1), [query, category, auth, cors, https, sortOrder, showBookmarksOnly]);
 
   const handleRandomApi = () => {
@@ -107,7 +119,7 @@ export default function Home() {
 
       <header className="sticky top-0 z-50 bg-[#FAFAFA]/80 dark:bg-black/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2 cursor-pointer">
+          <div className="flex items-center gap-2 cursor-pointer" onClick={resetFilters}>
             <div className="w-6 h-6 bg-black dark:bg-white text-white dark:text-black flex items-center justify-center rounded-[4px]">
               <Globe className="w-4 h-4" />
             </div>
@@ -117,7 +129,7 @@ export default function Home() {
           </div>
           
           <nav className="hidden lg:flex items-center gap-6">
-            <a href="#" className="text-[14px] font-medium text-neutral-900 dark:text-neutral-100">Directory</a>
+            <button onClick={resetFilters} className={`text-[14px] font-medium transition-colors ${!showBookmarksOnly ? 'text-neutral-900 dark:text-neutral-100' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300'}`}>Directory</button>
             <button onClick={() => setShowBookmarksOnly(!showBookmarksOnly)} className={`text-[14px] font-medium transition-colors flex items-center gap-1.5 ${showBookmarksOnly ? 'text-neutral-900 dark:text-white' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300'}`}>
               <Heart className={`w-4 h-4 ${showBookmarksOnly ? 'fill-current' : ''}`} /> 
               Favorites {bookmarks.size > 0 && <span className="ml-1 px-1.5 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-[11px] font-mono">{bookmarks.size}</span>}
@@ -284,7 +296,13 @@ export default function Home() {
                   )}
                   <div className="flex-1"></div>
                   <button
-                    onClick={() => setSelectedApi(api)}
+                    onClick={() => { setSelectedApi(api); setModalMode('details'); }}
+                    className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white text-[12px] font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity hover:bg-neutral-200 dark:hover:bg-neutral-700"
+                  >
+                    <FileText className="w-3.5 h-3.5" /> Details
+                  </button>
+                  <button
+                    onClick={() => { setSelectedApi(api); setModalMode('snippet'); }}
                     className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 bg-neutral-900 dark:bg-white text-white dark:text-black text-[12px] font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
                   >
                     <Code2 className="w-3.5 h-3.5" /> Snippet
@@ -328,55 +346,69 @@ export default function Home() {
               className="bg-white dark:bg-[#0a0a0a] rounded-xl max-w-2xl w-full shadow-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden" 
               onClick={e => e.stopPropagation()}
             >
-              <div className="px-6 py-5 border-b border-neutral-200 dark:border-neutral-800 flex justify-between items-center bg-[#FAFAFA] dark:bg-[#0a0a0a]">
-                <h3 className="text-[16px] font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
-                  <Code2 className="w-4 h-4 text-neutral-500" /> Integrate {selectedApi.name}
-                </h3>
+              <div className="px-6 py-4 border-b border-neutral-200 dark:border-neutral-800 flex justify-between items-center bg-[#FAFAFA] dark:bg-[#0a0a0a]">
+                <div className="flex items-center gap-4">
+                  <h3 className="text-[16px] font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
+                    {selectedApi.name}
+                  </h3>
+                  <div className="h-4 w-px bg-neutral-300 dark:bg-neutral-700"></div>
+                  <div className="flex bg-neutral-100 dark:bg-neutral-900 p-1 rounded-lg">
+                    <button onClick={() => setModalMode('details')} className={`px-3 py-1 text-[12px] font-medium rounded-md transition-colors ${modalMode === 'details' ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white'}`}>Details</button>
+                    <button onClick={() => setModalMode('snippet')} className={`px-3 py-1 text-[12px] font-medium rounded-md transition-colors ${modalMode === 'snippet' ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white'}`}>Code Snippet</button>
+                  </div>
+                </div>
                 <button onClick={() => setSelectedApi(null)} className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"><X className="w-4 h-4"/></button>
               </div>
 
               {/* Detailed Description */}
-              <div className="px-6 py-4 bg-white dark:bg-[#0a0a0a]">
-                <div className="text-[14px] text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                  <ReactMarkdown
-                    components={{
-                      ul: ({node, ...props}) => <ul className="list-disc pl-5 space-y-1.5 my-2" {...props} />,
-                      strong: ({node, ...props}) => <strong className="font-semibold text-neutral-900 dark:text-neutral-200" {...props} />,
-                      a: ({node, ...props}) => <a className="text-blue-500 hover:underline" target="_blank" rel="noreferrer" {...props} />,
-                      p: ({node, ...props}) => <p className="mb-2 last:mb-0" {...props} />
-                    }}
-                  >
-                    {selectedApi.detailedDescription || selectedApi.description}
-                  </ReactMarkdown>
+              {modalMode === 'details' && (
+                <div className="px-6 py-6 bg-white dark:bg-[#0a0a0a] min-h-[250px]">
+                  <div className="text-[14px] text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-none">
+                    <ReactMarkdown
+                      components={{
+                        ul: ({node, ...props}) => <ul className="list-disc pl-5 space-y-2 mb-4" {...props} />,
+                        li: ({node, ...props}) => <li className="pl-1" {...props} />,
+                        strong: ({node, ...props}) => <strong className="font-semibold text-neutral-900 dark:text-neutral-200" {...props} />,
+                        a: ({node, ...props}) => <a className="text-blue-500 hover:underline" target="_blank" rel="noreferrer" {...props} />,
+                        p: ({node, ...props}) => <p className="mb-4 last:mb-0" {...props} />
+                      }}
+                    >
+                      {selectedApi.detailedDescription || selectedApi.description}
+                    </ReactMarkdown>
+                  </div>
                 </div>
-              </div>
+              )}
             
-            {/* Language Tabs */}
-            <div className="flex border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#050505] px-2 pt-2 gap-1 overflow-x-auto">
-              {(['javascript', 'python', 'curl', 'nodejs', 'go'] as const).map(lang => (
-                <button 
-                  key={lang}
-                  onClick={() => setSnippetLanguage(lang)}
-                  className={`px-4 py-2 text-[13px] font-medium rounded-t-lg transition-colors border-b-2 ${snippetLanguage === lang ? 'border-neutral-900 dark:border-white text-neutral-900 dark:text-white bg-neutral-50 dark:bg-[#111]' : 'border-transparent text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-[#111]'}`}
-                >
-                  {lang === 'javascript' ? 'JavaScript (Fetch)' : 
-                   lang === 'python' ? 'Python (Requests)' : 
-                   lang === 'nodejs' ? 'Node.js (Axios)' : 
-                   lang === 'go' ? 'Go' : 'cURL'}
-                </button>
-              ))}
-            </div>
+              {/* Language Tabs & Snippet */}
+              {modalMode === 'snippet' && (
+                <div>
+                  <div className="flex border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#050505] px-2 pt-2 gap-1 overflow-x-auto">
+                    {(['javascript', 'python', 'curl', 'nodejs', 'go'] as const).map(lang => (
+                      <button 
+                        key={lang}
+                        onClick={() => setSnippetLanguage(lang)}
+                        className={`px-4 py-2 text-[13px] font-medium rounded-t-lg transition-colors border-b-2 ${snippetLanguage === lang ? 'border-neutral-900 dark:border-white text-neutral-900 dark:text-white bg-neutral-50 dark:bg-[#111]' : 'border-transparent text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-[#111]'}`}
+                      >
+                        {lang === 'javascript' ? 'JavaScript (Fetch)' : 
+                        lang === 'python' ? 'Python (Requests)' : 
+                        lang === 'nodejs' ? 'Node.js (Axios)' : 
+                        lang === 'go' ? 'Go' : 'cURL'}
+                      </button>
+                    ))}
+                  </div>
 
-            <div className="p-6 bg-white dark:bg-[#050505]">
-              <div className="relative group">
-                <pre className="bg-[#111] text-neutral-300 p-5 rounded-lg text-[13px] font-mono overflow-x-auto border border-neutral-800">
-                  <code>{generateSnippet(selectedApi, snippetLanguage)}</code>
-                </pre>
-                <button onClick={() => copySnippet(selectedApi)} className="absolute top-3 right-3 p-2 bg-neutral-800 rounded-md text-neutral-400 hover:text-white transition-colors shadow-sm" title="Copy to clipboard">
-                  <Copy className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
+                  <div className="p-6 bg-white dark:bg-[#050505] min-h-[250px]">
+                    <div className="relative group">
+                      <pre className="bg-[#111] text-neutral-300 p-5 rounded-lg text-[13px] font-mono overflow-x-auto border border-neutral-800">
+                        <code>{generateSnippet(selectedApi, snippetLanguage)}</code>
+                      </pre>
+                      <button onClick={() => copySnippet(selectedApi)} className="absolute top-3 right-3 p-2 bg-neutral-800 rounded-md text-neutral-400 hover:text-white transition-colors shadow-sm" title="Copy to clipboard">
+                        <Copy className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
           </motion.div>
         </motion.div>
       )}
