@@ -144,6 +144,14 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#FAFAFA] dark:bg-black text-neutral-900 dark:text-neutral-100 font-sans selection:bg-neutral-200 dark:selection:bg-neutral-800 transition-colors duration-300">
       
+      {/* Submit API Banner */}
+      <div className="bg-neutral-900 dark:bg-neutral-100 text-white dark:text-black text-[13px] font-medium py-2 px-4 flex flex-wrap justify-center items-center gap-2 text-center relative z-50">
+        <span>{appLanguage === 'fr' ? 'Vous souhaitez ajouter une API ? Contactez le développeur :' : 'Want to submit an API? Contact the developer:'}</span>
+        <a href="https://www.linkedin.com/in/amine-nahli-48b2a734b/" target="_blank" rel="noreferrer" className="underline font-bold hover:text-neutral-300 dark:hover:text-neutral-700 transition-colors">LinkedIn</a>
+        <span>•</span>
+        <a href="mailto:nahli-ami@upf.ac.ma" className="underline font-bold hover:text-neutral-300 dark:hover:text-neutral-700 transition-colors">Email</a>
+      </div>
+
       <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent"></div>
 
       <header className="sticky top-0 z-50 bg-[#FAFAFA]/80 dark:bg-black/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-900">
