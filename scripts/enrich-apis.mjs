@@ -23,11 +23,17 @@ const CONCURRENT_REQUESTS = 4; // L'API NVIDIA est très rapide, on peut lancer 
 // Read existing data
 let apis = [];
 try {
-  apis = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
-} catch (e) {
-  console.error("❌ Erreur : Impossible de lire apis.json");
+  const data = fs.readFileSync(jsonPath, 'utf-8');
+  apis = JSON.parse(data);
+} catch (err) {
+  console.error("❌ Impossible de lire apis.json. Lance d'abord 'node scripts/extract-apis.js'.");
   process.exit(1);
 }
+
+const pendingApis = apis.filter(api => !api.detailedDescription);
+
+console.log(`🚀 Démarrage de l'enrichissement de ${pendingApis.length} APIs avec ${MODEL_NAME}...`);
+console.log(`👉 Traitement par lots de ${BATCH_SIZE_TOTAL} avec ${CONCURRENT_REQUESTS} requêtes simultanées.\n`);
 
 // Function to call AI with a SMALL sub-batch
 async function generateDescriptionsSubBatch(subBatch) {
@@ -39,21 +45,22 @@ async function generateDescriptionsSubBatch(subBatch) {
     description: api.description
   }));
 
-  const prompt = `You are a technical writer for a developer directory.
-I will give you a JSON array of ${subBatch.length} APIs. 
-For EACH API, write a highly professional, detailed 2-sentence description explaining exactly what it does, what data it returns, and a use case.
+  const prompt = `You are an expert technical writer. I will give you a list of APIs. For each API, write a highly detailed, professional description.
+
+IMPORTANT FORMATTING RULE:
+The description MUST be formatted as a markdown list with EXACTLY 3 or 4 short bullet points. Use bold text for the bullet titles (e.g. "- **Purpose:** ..."). Keep it highly concise. Use \\n for line breaks.
 
 Input APIs:
 ${JSON.stringify(simplifiedBatch, null, 2)}
 
-IMPORTANT INSTRUCTIONS:
-1. You MUST return ONLY a valid JSON object with a single key "apis" containing an array of exactly ${subBatch.length} objects.
-2. Example output format:
+Return ONLY a JSON object containing an array named "apis". Each object in the array must have "name" and "detailedDescription".
+Example format:
 {
   "apis": [
-    { "name": "API Name Here", "detailedDescription": "Description here..." }
+    { "name": "API Name", "detailedDescription": "- **Purpose:** ...\\n- **Features:** ..." }
   ]
-}`;
+}
+Do not add any conversational text or markdown code blocks around the JSON.`;
 
   try {
     const response = await fetch(AI_ENDPOINT, {

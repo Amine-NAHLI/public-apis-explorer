@@ -15,7 +15,7 @@ if (!API_KEY) {
 }
 
 async function runTest() {
-  console.log(`🧪 Lancement du test avec l'IA Locale...`);
+  console.log(`🧪 Lancement du test avec l'API IA...`);
   console.log(`Endpoint: ${AI_ENDPOINT}`);
   console.log(`Modèle: ${MODEL_NAME}`);
   console.log(`-----------------------------------\n`);
@@ -28,14 +28,15 @@ async function runTest() {
     link: "https://theaxolotlapi.netlify.app/"
   };
 
-  const prompt = `You are a technical writer for a developer directory.
-Write a detailed 2-3 sentence description for the API named "${api.name}".
+  const prompt = `You are a technical writer. Write a detailed description for the API "${api.name}".
 Category: ${api.category}
-Short description: ${api.description}
+Description: ${api.description}
 Link: ${api.link}
 
-Explain exactly what this API does, what kind of data it returns, and a potential use case. Keep it highly professional and concise.
-IMPORTANT: Return ONLY the final description text. Do NOT include any conversational filler (like "Here is the description..."), markdown titles, or API names at the beginning. Just the raw description paragraph.`;
+IMPORTANT FORMATTING RULE:
+The detailed description MUST be written using markdown bullet points. Limit the output to EXACTLY 3 or 4 short bullet points. Use bold text for the bullet titles (e.g. "- **Purpose:** ..."). Keep it highly concise, professional, and use \\n for line breaks.
+
+IMPORTANT: Return ONLY the final description text using bullet points. Do NOT include any conversational filler (like "Here is the description..."), markdown titles, or API names at the beginning. Just the raw bullet points.`;
 
   console.log(`Envoi de la requête à ${MODEL_NAME}... (Patiente quelques secondes)\n`);
 
@@ -61,7 +62,7 @@ IMPORTANT: Return ONLY the final description text. Do NOT include any conversati
     const data = await response.json();
     const result = data.choices[0].message.content.trim();
     
-    console.log(`✅ Réponse reçue de Gemma 3 :\n`);
+    console.log(`✅ Réponse reçue de ${MODEL_NAME} :\n`);
     console.log(`===================================`);
     console.log(result);
     console.log(`===================================\n`);
