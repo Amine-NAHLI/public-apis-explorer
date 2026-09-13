@@ -5,8 +5,14 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const AI_ENDPOINT = process.env.AI_ENDPOINT || 'http://127.0.0.1:8080/v1/chat/completions';
-const MODEL_NAME = process.env.MODEL_NAME || 'gemma3';
+const AI_ENDPOINT = process.env.AI_ENDPOINT || 'https://api.openai.com/v1/chat/completions';
+const MODEL_NAME = process.env.MODEL_NAME || 'gpt-4o-mini';
+const API_KEY = process.env.OPENAI_API_KEY;
+
+if (!API_KEY) {
+  console.error("❌ Erreur : La variable d'environnement OPENAI_API_KEY est manquante.");
+  process.exit(1);
+}
 
 async function runTest() {
   console.log(`🧪 Lancement du test avec l'IA Locale...`);
@@ -37,7 +43,8 @@ IMPORTANT: Return ONLY the final description text. Do NOT include any conversati
     const response = await fetch(AI_ENDPOINT, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${API_KEY}`
       },
       body: JSON.stringify({
         model: MODEL_NAME,

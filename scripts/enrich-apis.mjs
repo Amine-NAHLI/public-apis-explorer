@@ -7,13 +7,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const jsonPath = path.resolve(__dirname, '../src/data/apis.json');
-// URL pour NVIDIA NIM
-const AI_ENDPOINT = 'https://integrate.api.nvidia.com/v1/chat/completions';
-const MODEL_NAME = process.env.MODEL_NAME || 'meta/llama-3.2-90b-vision-instruct';
-const API_KEY = process.env.NVIDIA_API_KEY;
+// URL pour OpenAI
+const AI_ENDPOINT = 'https://api.openai.com/v1/chat/completions';
+const MODEL_NAME = process.env.MODEL_NAME || 'gpt-4o-mini';
+const API_KEY = process.env.OPENAI_API_KEY;
 
 if (!API_KEY) {
-  console.error("❌ Erreur : La variable d'environnement NVIDIA_API_KEY est manquante.");
+  console.error("❌ Erreur : La variable d'environnement OPENAI_API_KEY est manquante.");
   process.exit(1);
 }
 
@@ -66,7 +66,7 @@ IMPORTANT INSTRUCTIONS:
         model: MODEL_NAME,
         messages: [{ role: 'user', content: prompt }],
         temperature: 0.2,
-        response_format: { type: "json_object" } // Force le format JSON strict (Nécessite llama.cpp récent)
+        response_format: { type: "json_object" }
       })
     });
 
