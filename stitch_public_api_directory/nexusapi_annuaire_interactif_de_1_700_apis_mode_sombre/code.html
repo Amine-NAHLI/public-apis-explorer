@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="fr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "secondary-fixed-dim": "#bdc2ff",
+          "secondary": "#bdc2ff",
+          "on-primary-fixed-variant": "#2f2ebe",
+          "surface-dim": "#121316",
+          "on-primary-fixed": "#07006c",
+          "on-error-container": "#ffdad6",
+          "primary-fixed": "#e1e0ff",
+          "surface-container": "#1f1f23",
+          "tertiary-fixed-dim": "#4edea3",
+          "on-tertiary-container": "#000703",
+          "on-secondary-container": "#a8afff",
+          "background": "#0b0c10",
+          "on-error": "#690005",
+          "inverse-on-surface": "#303034",
+          "on-tertiary": "#003824",
+          "surface": "#090a0f",
+          "surface-variant": "#343538",
+          "secondary-fixed": "#e0e0ff",
+          "on-primary-container": "#0d0096",
+          "error": "#ffb4ab",
+          "surface-bright": "#38393c",
+          "on-surface-variant": "#94a3b8",
+          "surface-container-high": "#292a2d",
+          "on-secondary-fixed": "#000767",
+          "primary-container": "#6366f1",
+          "outline-variant": "#464554",
+          "error-container": "#93000a",
+          "surface-container-low": "#131622",
+          "primary-fixed-dim": "#c0c1ff",
+          "inverse-primary": "#494bd6",
+          "surface-tint": "#c0c1ff",
+          "tertiary": "#4edea3",
+          "on-surface": "#f8fafc",
+          "surface-container-lowest": "#0d0e14",
+          "tertiary-fixed": "#6ffbbe",
+          "on-primary": "#ffffff",
+          "primary": "#6366f1",
+          "on-background": "#f8fafc",
+          "surface-container-highest": "#343538",
+          "on-tertiary-fixed": "#002113",
+          "inverse-surface": "#e3e2e6",
+          "outline": "#908fa0",
+          "on-secondary-fixed-variant": "#2f3aa3",
+          "on-secondary": "#131e8c",
+          "secondary-container": "#2f3aa3",
+          "tertiary-container": "#00885d",
+          "on-tertiary-fixed-variant": "#005236"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-sm": "0.5rem",
+          "gutter": "1.5rem",
+          "space-lg": "1.5rem",
+          "gutter-lg": "2rem",
+          "margin-lg": "4rem",
+          "space-md": "1rem",
+          "margin-sm": "1rem",
+          "space-xs": "0.25rem",
+          "gutter-sm": "1rem",
+          "margin": "2rem",
+          "space-xl": "2.5rem"
+        },
+        "fontFamily": {
+          "code-badge": ["JetBrains Mono"],
+          "headline-lg-mobile": ["Geist"],
+          "code-base": ["JetBrains Mono"],
+          "display-hero-mobile": ["Geist"],
+          "body-lg": ["Geist"],
+          "body-sm": ["Geist"],
+          "headline-md": ["Geist"],
+          "headline-lg": ["Geist"],
+          "display-hero": ["Geist"],
+          "label-md": ["JetBrains Mono"],
+          "label-xs": ["JetBrains Mono"],
+          "headline-sm": ["Geist"],
+          "body-md": ["Geist"]
+        },
+        "fontSize": {
+          "code-badge": ["11px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+          "headline-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+          "code-base": ["13px", {"lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+          "display-hero-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "600"}],
+          "body-lg": ["16px", {"lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+          "body-sm": ["13px", {"lineHeight": "19px", "letterSpacing": "0em", "fontWeight": "400"}],
+          "headline-md": ["20px", {"lineHeight": "26px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+          "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "600"}],
+          "display-hero": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.035em", "fontWeight": "600"}],
+          "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+          "label-xs": ["10px", {"lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600"}],
+          "headline-sm": ["16px", {"lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+          "body-md": ["14px", {"lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400"}]
+        }
+      }
+    }
+  };</script></head><body class="bg-[#090a0f] font-body-sm text-body-sm text-slate-200 antialiased selection:bg-indigo-500/30 selection:text-indigo-200"><header class="fixed top-0 left-0 right-0 z-50 bg-[#0f1117]/80 backdrop-blur-md border-b border-white/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.4)]"><div class="h-16 max-w-7xl mx-auto px-4 md:px-8 lg:px-12 flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-sm group" data-path="directory" href="#"><div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-[0_0_15px_rgba(99,102,241,0.5)] group-hover:bg-indigo-500 transition-all"><span class="material-symbols-outlined text-[20px]">hub</span></div><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-md text-[20px] font-semibold tracking-tight text-white">Nexus<span class="text-indigo-400">API</span></span></div></div></a><div class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 bg-white/[0.05] border border-white/[0.08] rounded-full text-slate-400 font-label-md text-[11px]"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span><span>1,742 APIs indexed</span></div></div><nav class="hidden lg:flex items-center gap-1 p-1 bg-white/[0.03] border border-white/[0.06] rounded-xl"><a aria-current="page" class="px-3.5 py-1.5 transition-colors bg-indigo-600 text-white font-medium rounded-lg text-[13px] shadow-sm" data-path="directory" href="#">Directory</a><a class="px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.06] transition-colors font-body-sm text-[13px]" data-path="categories" href="#">Categories</a><a class="px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.06] transition-colors font-body-sm text-[13px]" data-path="playground" href="#">Playground</a><a class="px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.06] transition-colors font-body-sm text-[13px]" data-path="changelog" href="#">Changelog</a><a class="px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.06] transition-colors font-body-sm text-[13px]" data-path="submit-api" href="#">Submit API</a></nav><div class="flex items-center gap-2.5"><button aria-label="Basculer le thème" class="w-9 h-9 flex items-center justify-center rounded-xl bg-white/[0.05] border border-white/[0.08] hover:bg-white/[0.1] text-amber-400 hover:text-amber-300 transition-colors shadow-inner" onclick="document.documentElement.classList.toggle('dark')" type="button"><span class="material-symbols-outlined text-[18px]">light_mode</span></button><a class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.05] border border-white/[0.08] hover:bg-white/[0.1] text-slate-300 hover:text-white transition-colors text-[13px]" data-path="github-stars" href="#"><span class="material-symbols-outlined text-[16px] text-amber-400">star</span><span class="font-code-badge text-code-badge font-medium">4.8k</span></a><a class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white transition-all text-[13px] font-medium shadow-[0_0_15px_rgba(99,102,241,0.35)]" data-path="submit-api" href="#"><span class="material-symbols-outlined text-[16px]">add</span><span>Submit API</span></a><div class="w-8 h-8 rounded-full bg-indigo-500/20 border border-indigo-400/30 flex items-center justify-center text-indigo-300"><span class="material-symbols-outlined text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-[#090a0f] min-h-screen text-slate-200"><div class="flex flex-col w-full">
+<!-- Subtle Ambient Glow Background Graphic -->
+<div class="relative w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-12 pt-8 pb-12">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[720px] h-[360px] bg-gradient-to-b from-indigo-600/20 via-purple-600/10 to-transparent rounded-full blur-[90px] pointer-events-none -z-10"></div>
+<!-- Hero Section -->
+<div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-10">
+<!-- Floating Capsule Badge -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] shadow-[0_2px_10px_rgba(0,0,0,0.3)] mb-4 text-slate-300 cursor-default">
+<span class="text-amber-400 font-medium text-xs">⚡</span>
+<span class="font-label-md text-[11px] tracking-tight">Curated catalog of 1,742 free &amp; public APIs</span>
+<span class="w-1 h-1 rounded-full bg-slate-600"></span>
+<span class="font-label-md text-[11px] text-slate-400 font-normal">Updated hourly</span>
+</div>
+<!-- Main Headline -->
+<h1 class="font-display-hero text-[34px] sm:text-[44px] md:text-display-hero text-white tracking-tight mb-3 font-semibold">
+        The Definitive <span class="bg-gradient-to-r from-indigo-400 via-indigo-300 to-violet-400 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(99,102,241,0.35)]">Public API</span> Index
+      </h1>
+<!-- Subtitle -->
+<p class="font-body-lg text-body-lg text-slate-400 max-w-2xl text-balance">
+        Explore, filter, and integrate over 1,700 curated APIs for your next project. Zero friction, unified specs, and instant live status.
+      </p>
+<!-- Luxury Dark Search Bar -->
+<div class="w-full mt-7 relative group">
+<div class="relative flex items-center w-full bg-[#141722]/90 border border-white/[0.08] hover:border-indigo-500/40 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.4)] transition-all duration-200 focus-within:shadow-[0_0_25px_rgba(99,102,241,0.25)] focus-within:border-indigo-500/60 focus-within:ring-1 focus-within:ring-indigo-500/50">
+<span class="material-symbols-outlined text-slate-400 ml-4 text-[22px] select-none group-focus-within:text-indigo-400 transition-colors">search</span>
+<input class="w-full py-4 px-3 bg-transparent font-body-lg text-body-lg text-white placeholder:text-slate-500 focus:outline-none" id="searchInput" placeholder="Search by API name, keyword, authentication, or protocol..." type="text"/>
+<button aria-label="Effacer la recherche" class="hidden text-slate-400 hover:text-white p-1 mr-2 transition-colors" id="clearSearch" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+<div class="hidden sm:flex items-center gap-1 mr-4 px-2.5 py-1 bg-white/[0.06] border border-white/[0.08] rounded-lg text-slate-400 select-none">
+<span class="font-code-badge text-[12px] font-semibold text-slate-300">⌘</span>
+<span class="font-code-badge text-[12px] text-slate-300">K</span>
+</div>
+</div>
+</div>
+<!-- Category Filter Pills Bar -->
+<div class="w-full flex items-center gap-2 overflow-x-auto py-3 no-scrollbar mt-3" id="categoryFilterContainer">
+<button class="filter-pill active-pill px-3.5 py-1.5 rounded-full font-label-md text-[12px] flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 bg-indigo-600 text-white shadow-[0_0_12px_rgba(99,102,241,0.4)] border border-indigo-400/30 font-medium" data-category="all">
+<span class="material-symbols-outlined text-[15px]">apps</span> All (1,742)
+        </button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full font-label-md text-[12px] flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 bg-white/[0.05] border border-white/[0.08] text-slate-300 hover:bg-white/[0.1] hover:text-white" data-category="ai">
+<span class="material-symbols-outlined text-[15px]">psychology</span> AI &amp; ML
+        </button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full font-label-md text-[12px] flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 bg-white/[0.05] border border-white/[0.08] text-slate-300 hover:bg-white/[0.1] hover:text-white" data-category="finance">
+<span class="material-symbols-outlined text-[15px]">account_balance</span> Finance
+        </button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full font-label-md text-[12px] flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 bg-white/[0.05] border border-white/[0.08] text-slate-300 hover:bg-white/[0.1] hover:text-white" data-category="devtools">
+<span class="material-symbols-outlined text-[15px]">terminal</span> Developer Tools
+        </button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full font-label-md text-[12px] flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 bg-white/[0.05] border border-white/[0.08] text-slate-300 hover:bg-white/[0.1] hover:text-white" data-category="crypto">
+<span class="material-symbols-outlined text-[15px]">currency_bitcoin</span> Crypto
+        </button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full font-label-md text-[12px] flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 bg-white/[0.05] border border-white/[0.08] text-slate-300 hover:bg-white/[0.1] hover:text-white" data-category="weather">
+<span class="material-symbols-outlined text-[15px]">wb_sunny</span> Weather
+        </button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full font-label-md text-[12px] flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 bg-white/[0.05] border border-white/[0.08] text-slate-300 hover:bg-white/[0.1] hover:text-white" data-category="opendata">
+<span class="material-symbols-outlined text-[15px]">public</span> Open Data
+        </button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full font-label-md text-[12px] flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 bg-white/[0.05] border border-white/[0.08] text-slate-300 hover:bg-white/[0.1] hover:text-white" data-category="media">
+<span class="material-symbols-outlined text-[15px]">photo_library</span> Media &amp; Audio
+        </button>
+</div>
+</div>
+<!-- Secondary Meta Toolbar: Filters & Live Count -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 py-2.5 mb-6 bg-white/[0.03] border border-white/[0.06] rounded-xl px-4">
+<!-- Technical Facets Dropdowns -->
+<div class="flex flex-wrap items-center gap-2.5">
+<!-- HTTPS Filter -->
+<div class="relative">
+<select class="appearance-none bg-[#141722] text-slate-200 border border-white/[0.08] hover:border-white/[0.15] font-label-md text-[12px] pl-3 pr-7 py-1.5 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500/50 cursor-pointer" id="filterHttps">
+<option value="all">HTTPS: All</option>
+<option value="yes">HTTPS: Yes</option>
+<option value="optional">HTTPS: Optional</option>
+</select>
+<span class="material-symbols-outlined text-[15px] text-slate-400 pointer-events-none absolute right-2 top-1/2 -translate-y-1/2">expand_more</span>
+</div>
+<!-- CORS Filter -->
+<div class="relative">
+<select class="appearance-none bg-[#141722] text-slate-200 border border-white/[0.08] hover:border-white/[0.15] font-label-md text-[12px] pl-3 pr-7 py-1.5 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500/50 cursor-pointer" id="filterCors">
+<option value="all">CORS: All</option>
+<option value="yes">CORS: Yes</option>
+<option value="no">CORS: No</option>
+<option value="unknown">CORS: Unknown</option>
+</select>
+<span class="material-symbols-outlined text-[15px] text-slate-400 pointer-events-none absolute right-2 top-1/2 -translate-y-1/2">expand_more</span>
+</div>
+<!-- Auth Filter -->
+<div class="relative">
+<select class="appearance-none bg-[#141722] text-slate-200 border border-white/[0.08] hover:border-white/[0.15] font-label-md text-[12px] pl-3 pr-7 py-1.5 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500/50 cursor-pointer" id="filterAuth">
+<option value="all">Auth: All</option>
+<option value="no-auth">No Auth</option>
+<option value="api-key">API Key</option>
+<option value="oauth">OAuth 2.0</option>
+</select>
+<span class="material-symbols-outlined text-[15px] text-slate-400 pointer-events-none absolute right-2 top-1/2 -translate-y-1/2">expand_more</span>
+</div>
+</div>
+<!-- Live Count & Sort View -->
+<div class="flex items-center gap-4 justify-between w-full md:w-auto">
+<span class="font-code-badge text-code-badge text-slate-400" id="resultsCount">
+          Showing <span class="font-semibold text-white">12</span> of 1,742 APIs
+        </span>
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-[12px] text-slate-400 hidden sm:inline">Sort:</span>
+<div class="relative">
+<select class="appearance-none bg-[#141722] text-slate-200 border border-white/[0.08] hover:border-white/[0.15] font-label-md text-[12px] pl-2.5 pr-7 py-1.5 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500/50 cursor-pointer">
+<option>Most Popular</option>
+<option>Recently Added</option>
+<option>Lowest Latency</option>
+<option>Alphabetical</option>
+</select>
+<span class="material-symbols-outlined text-[15px] text-slate-400 pointer-events-none absolute right-2 top-1/2 -translate-y-1/2">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- API Grid Section (3 Columns Responsive) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-4" id="apiGrid">
+<!-- Card 1: OpenAI -->
+<div class="api-card group flex flex-col justify-between bg-[#11131b] border border-white/[0.08] rounded-xl p-5 shadow-2xl hover:border-indigo-500/40 hover:shadow-[0_0_25px_rgba(99,102,241,0.2)] hover:-translate-y-1 transition-all duration-200">
+<div>
+<!-- Header -->
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-indigo-400 shadow-inner font-code-badge">
+<span class="material-symbols-outlined text-[22px]">neurology</span>
+</div>
+<div>
+<a class="font-headline-md text-[17px] font-semibold text-white group-hover:text-indigo-400 transition-colors flex items-center gap-1" href="#">
+                  OpenAI API
+                  <span class="material-symbols-outlined text-[15px] text-slate-500 group-hover:text-indigo-400 transition-colors">north_east</span>
+</a>
+<span class="font-code-badge text-code-badge text-slate-400">api.openai.com/v1</span>
+</div>
+</div>
+<!-- Ping Status -->
+<div class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/20 text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+<span class="font-label-md text-[11px] font-medium">99.9%</span>
+</div>
+</div>
+<!-- Description -->
+<p class="font-body-sm text-body-sm text-slate-400 line-clamp-2 mb-4">
+            Direct access to state-of-the-art transformer models including GPT-4o, DALL·E 3, and Whisper for text, voice, and vision.
+          </p>
+<!-- Badges -->
+<div class="flex flex-wrap items-center gap-1.5 mb-4">
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">AI &amp; ML</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-emerald-400">lock</span>HTTPS
+            </span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">CORS: Yes</span>
+<span class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 font-label-md text-[11px] font-medium">API Key</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+<button class="copy-btn flex items-center gap-1 text-slate-400 hover:text-white font-label-md text-[12px] px-2.5 py-1.5 rounded-lg hover:bg-white/[0.08] transition-colors" data-url="https://api.openai.com/v1" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-md text-[12px] font-medium px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-[0_0_12px_rgba(99,102,241,0.3)]" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2: Stripe Connect -->
+<div class="api-card group flex flex-col justify-between bg-[#11131b] border border-white/[0.08] rounded-xl p-5 shadow-2xl hover:border-indigo-500/40 hover:shadow-[0_0_25px_rgba(99,102,241,0.2)] hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-indigo-400 shadow-inner font-code-badge">
+<span class="material-symbols-outlined text-[22px]">payments</span>
+</div>
+<div>
+<a class="font-headline-md text-[17px] font-semibold text-white group-hover:text-indigo-400 transition-colors flex items-center gap-1" href="#">
+                  Stripe Engine
+                  <span class="material-symbols-outlined text-[15px] text-slate-500 group-hover:text-indigo-400 transition-colors">north_east</span>
+</a>
+<span class="font-code-badge text-code-badge text-slate-400">api.stripe.com/v1</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/20 text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+<span class="font-label-md text-[11px] font-medium">99.99%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-slate-400 line-clamp-2 mb-4">
+            Global payment processing infrastructure supporting credit cards, recurring billing, multi-party marketplace payouts, and fraud prevention.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-4">
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">Finance</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-emerald-400">lock</span>HTTPS
+            </span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">CORS: Yes</span>
+<span class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 font-label-md text-[11px] font-medium">API Key</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+<button class="copy-btn flex items-center gap-1 text-slate-400 hover:text-white font-label-md text-[12px] px-2.5 py-1.5 rounded-lg hover:bg-white/[0.08] transition-colors" data-url="https://api.stripe.com/v1" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-md text-[12px] font-medium px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-[0_0_12px_rgba(99,102,241,0.3)]" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3: CoinGecko -->
+<div class="api-card group flex flex-col justify-between bg-[#11131b] border border-white/[0.08] rounded-xl p-5 shadow-2xl hover:border-indigo-500/40 hover:shadow-[0_0_25px_rgba(99,102,241,0.2)] hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-amber-400 shadow-inner font-code-badge">
+<span class="material-symbols-outlined text-[22px]">toll</span>
+</div>
+<div>
+<a class="font-headline-md text-[17px] font-semibold text-white group-hover:text-indigo-400 transition-colors flex items-center gap-1" href="#">
+                  CoinGecko v3
+                  <span class="material-symbols-outlined text-[15px] text-slate-500 group-hover:text-indigo-400 transition-colors">north_east</span>
+</a>
+<span class="font-code-badge text-code-badge text-slate-400">api.coingecko.com/v3</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/20 text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+<span class="font-label-md text-[11px] font-medium">99.8%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-slate-400 line-clamp-2 mb-4">
+            Cryptocurrency data index tracking real-time price feeds, tickers, historical market metrics, trading volumes, and DEX contracts.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-4">
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">Crypto</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-emerald-400">lock</span>HTTPS
+            </span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">CORS: Yes</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px] font-medium">No Auth</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+<button class="copy-btn flex items-center gap-1 text-slate-400 hover:text-white font-label-md text-[12px] px-2.5 py-1.5 rounded-lg hover:bg-white/[0.08] transition-colors" data-url="https://api.coingecko.com/api/v3" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-md text-[12px] font-medium px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-[0_0_12px_rgba(99,102,241,0.3)]" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 4: OpenWeatherMap -->
+<div class="api-card group flex flex-col justify-between bg-[#11131b] border border-white/[0.08] rounded-xl p-5 shadow-2xl hover:border-indigo-500/40 hover:shadow-[0_0_25px_rgba(99,102,241,0.2)] hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-indigo-400 shadow-inner font-code-badge">
+<span class="material-symbols-outlined text-[22px]">cloud_queue</span>
+</div>
+<div>
+<a class="font-headline-md text-[17px] font-semibold text-white group-hover:text-indigo-400 transition-colors flex items-center gap-1" href="#">
+                  OpenWeather
+                  <span class="material-symbols-outlined text-[15px] text-slate-500 group-hover:text-indigo-400 transition-colors">north_east</span>
+</a>
+<span class="font-code-badge text-code-badge text-slate-400">api.openweathermap.org</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/20 text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+<span class="font-label-md text-[11px] font-medium">99.95%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-slate-400 line-clamp-2 mb-4">
+            Hyperlocal meteorological forecasts, solar radiation, historical atmospheric charts, and precipitation radars for any geolocation.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-4">
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">Weather</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-emerald-400">lock</span>HTTPS
+            </span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">CORS: Yes</span>
+<span class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 font-label-md text-[11px] font-medium">API Key</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+<button class="copy-btn flex items-center gap-1 text-slate-400 hover:text-white font-label-md text-[12px] px-2.5 py-1.5 rounded-lg hover:bg-white/[0.08] transition-colors" data-url="https://api.openweathermap.org/data/2.5" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-md text-[12px] font-medium px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-[0_0_12px_rgba(99,102,241,0.3)]" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 5: GitHub REST -->
+<div class="api-card group flex flex-col justify-between bg-[#11131b] border border-white/[0.08] rounded-xl p-5 shadow-2xl hover:border-indigo-500/40 hover:shadow-[0_0_25px_rgba(99,102,241,0.2)] hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-slate-200 shadow-inner font-code-badge">
+<span class="material-symbols-outlined text-[22px]">code</span>
+</div>
+<div>
+<a class="font-headline-md text-[17px] font-semibold text-white group-hover:text-indigo-400 transition-colors flex items-center gap-1" href="#">
+                  GitHub REST
+                  <span class="material-symbols-outlined text-[15px] text-slate-500 group-hover:text-indigo-400 transition-colors">north_east</span>
+</a>
+<span class="font-code-badge text-code-badge text-slate-400">api.github.com</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/20 text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+<span class="font-label-md text-[11px] font-medium">99.98%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-slate-400 line-clamp-2 mb-4">
+            Programmatic control over repositories, pull requests, automated GitHub Actions workflows, user profiles, and webhooks.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-4">
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">Developer Tools</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-emerald-400">lock</span>HTTPS
+            </span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">CORS: Yes</span>
+<span class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 font-label-md text-[11px] font-medium">OAuth 2.0</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+<button class="copy-btn flex items-center gap-1 text-slate-400 hover:text-white font-label-md text-[12px] px-2.5 py-1.5 rounded-lg hover:bg-white/[0.08] transition-colors" data-url="https://api.github.com" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-md text-[12px] font-medium px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-[0_0_12px_rgba(99,102,241,0.3)]" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 6: DeepL Translate -->
+<div class="api-card group flex flex-col justify-between bg-[#11131b] border border-white/[0.08] rounded-xl p-5 shadow-2xl hover:border-indigo-500/40 hover:shadow-[0_0_25px_rgba(99,102,241,0.2)] hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-indigo-400 shadow-inner font-code-badge">
+<span class="material-symbols-outlined text-[22px]">translate</span>
+</div>
+<div>
+<a class="font-headline-md text-[17px] font-semibold text-white group-hover:text-indigo-400 transition-colors flex items-center gap-1" href="#">
+                  DeepL Engine
+                  <span class="material-symbols-outlined text-[15px] text-slate-500 group-hover:text-indigo-400 transition-colors">north_east</span>
+</a>
+<span class="font-code-badge text-code-badge text-slate-400">api-free.deepl.com/v2</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/20 text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+<span class="font-label-md text-[11px] font-medium">99.9%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-slate-400 line-clamp-2 mb-4">
+            World-class neural machine translation for sentences and documents with tone customization, glossary support, and language detection.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-4">
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">AI &amp; ML</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-emerald-400">lock</span>HTTPS
+            </span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">CORS: Yes</span>
+<span class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 font-label-md text-[11px] font-medium">API Key</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+<button class="copy-btn flex items-center gap-1 text-slate-400 hover:text-white font-label-md text-[12px] px-2.5 py-1.5 rounded-lg hover:bg-white/[0.08] transition-colors" data-url="https://api-free.deepl.com/v2" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-md text-[12px] font-medium px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-[0_0_12px_rgba(99,102,241,0.3)]" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 7: Supabase PostgREST -->
+<div class="api-card group flex flex-col justify-between bg-[#11131b] border border-white/[0.08] rounded-xl p-5 shadow-2xl hover:border-indigo-500/40 hover:shadow-[0_0_25px_rgba(99,102,241,0.2)] hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-emerald-400 shadow-inner font-code-badge">
+<span class="material-symbols-outlined text-[22px]">database</span>
+</div>
+<div>
+<a class="font-headline-md text-[17px] font-semibold text-white group-hover:text-indigo-400 transition-colors flex items-center gap-1" href="#">
+                  Supabase API
+                  <span class="material-symbols-outlined text-[15px] text-slate-500 group-hover:text-indigo-400 transition-colors">north_east</span>
+</a>
+<span class="font-code-badge text-code-badge text-slate-400">project.supabase.co/rest</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/20 text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+<span class="font-label-md text-[11px] font-medium">99.99%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-slate-400 line-clamp-2 mb-4">
+            Auto-generated instant RESTful and GraphQL APIs over PostgreSQL databases with integrated Row Level Security policies.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-4">
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">Developer Tools</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-emerald-400">lock</span>HTTPS
+            </span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">CORS: Yes</span>
+<span class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 font-label-md text-[11px] font-medium">API Key</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+<button class="copy-btn flex items-center gap-1 text-slate-400 hover:text-white font-label-md text-[12px] px-2.5 py-1.5 rounded-lg hover:bg-white/[0.08] transition-colors" data-url="https://supabase.com/docs/guides/api" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-md text-[12px] font-medium px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-[0_0_12px_rgba(99,102,241,0.3)]" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 8: Unsplash Photo Index -->
+<div class="api-card group flex flex-col justify-between bg-[#11131b] border border-white/[0.08] rounded-xl p-5 shadow-2xl hover:border-indigo-500/40 hover:shadow-[0_0_25px_rgba(99,102,241,0.2)] hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-slate-200 shadow-inner font-code-badge">
+<span class="material-symbols-outlined text-[22px]">photo_camera</span>
+</div>
+<div>
+<a class="font-headline-md text-[17px] font-semibold text-white group-hover:text-indigo-400 transition-colors flex items-center gap-1" href="#">
+                  Unsplash REST
+                  <span class="material-symbols-outlined text-[15px] text-slate-500 group-hover:text-indigo-400 transition-colors">north_east</span>
+</a>
+<span class="font-code-badge text-code-badge text-slate-400">api.unsplash.com</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/20 text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+<span class="font-label-md text-[11px] font-medium">99.8%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-slate-400 line-clamp-2 mb-4">
+            Rich programmatic catalog of 5M+ high-resolution, community-submitted creative photographs with geometric color tagging.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-4">
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">Media</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-emerald-400">lock</span>HTTPS
+            </span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">CORS: Yes</span>
+<span class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 font-label-md text-[11px] font-medium">OAuth 2.0</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+<button class="copy-btn flex items-center gap-1 text-slate-400 hover:text-white font-label-md text-[12px] px-2.5 py-1.5 rounded-lg hover:bg-white/[0.08] transition-colors" data-url="https://api.unsplash.com" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-md text-[12px] font-medium px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-[0_0_12px_rgba(99,102,241,0.3)]" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 9: NASA Open APIs -->
+<div class="api-card group flex flex-col justify-between bg-[#11131b] border border-white/[0.08] rounded-xl p-5 shadow-2xl hover:border-indigo-500/40 hover:shadow-[0_0_25px_rgba(99,102,241,0.2)] hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-indigo-400 shadow-inner font-code-badge">
+<span class="material-symbols-outlined text-[22px]">rocket_launch</span>
+</div>
+<div>
+<a class="font-headline-md text-[17px] font-semibold text-white group-hover:text-indigo-400 transition-colors flex items-center gap-1" href="#">
+                  NASA APIs
+                  <span class="material-symbols-outlined text-[15px] text-slate-500 group-hover:text-indigo-400 transition-colors">north_east</span>
+</a>
+<span class="font-code-badge text-code-badge text-slate-400">api.nasa.gov</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/20 text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+<span class="font-label-md text-[11px] font-medium">99.7%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-slate-400 line-clamp-2 mb-4">
+            Astrophysical imagery, Mars Curiosity and Perseverance rover raw telemetry, near-Earth asteroid tracking, and space observation.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-4">
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">Open Data</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-emerald-400">lock</span>HTTPS
+            </span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">CORS: Yes</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px] font-medium">No Auth</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+<button class="copy-btn flex items-center gap-1 text-slate-400 hover:text-white font-label-md text-[12px] px-2.5 py-1.5 rounded-lg hover:bg-white/[0.08] transition-colors" data-url="https://api.nasa.gov" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-md text-[12px] font-medium px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-[0_0_12px_rgba(99,102,241,0.3)]" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 10: Spotify Web API -->
+<div class="api-card group flex flex-col justify-between bg-[#11131b] border border-white/[0.08] rounded-xl p-5 shadow-2xl hover:border-indigo-500/40 hover:shadow-[0_0_25px_rgba(99,102,241,0.2)] hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-emerald-400 shadow-inner font-code-badge">
+<span class="material-symbols-outlined text-[22px]">graphic_eq</span>
+</div>
+<div>
+<a class="font-headline-md text-[17px] font-semibold text-white group-hover:text-indigo-400 transition-colors flex items-center gap-1" href="#">
+                  Spotify API
+                  <span class="material-symbols-outlined text-[15px] text-slate-500 group-hover:text-indigo-400 transition-colors">north_east</span>
+</a>
+<span class="font-code-badge text-code-badge text-slate-400">api.spotify.com/v1</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/20 text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+<span class="font-label-md text-[11px] font-medium">99.95%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-slate-400 line-clamp-2 mb-4">
+            Query 100M+ music tracks, albums, curated user playlists, audio analysis vectors, and control playback across connected devices.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-4">
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">Media</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-emerald-400">lock</span>HTTPS
+            </span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">CORS: Yes</span>
+<span class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 font-label-md text-[11px] font-medium">OAuth 2.0</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+<button class="copy-btn flex items-center gap-1 text-slate-400 hover:text-white font-label-md text-[12px] px-2.5 py-1.5 rounded-lg hover:bg-white/[0.08] transition-colors" data-url="https://api.spotify.com/v1" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-md text-[12px] font-medium px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-[0_0_12px_rgba(99,102,241,0.3)]" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 11: HuggingFace Inference -->
+<div class="api-card group flex flex-col justify-between bg-[#11131b] border border-white/[0.08] rounded-xl p-5 shadow-2xl hover:border-indigo-500/40 hover:shadow-[0_0_25px_rgba(99,102,241,0.2)] hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-indigo-400 shadow-inner font-code-badge">
+<span class="material-symbols-outlined text-[22px]">smart_toy</span>
+</div>
+<div>
+<a class="font-headline-md text-[17px] font-semibold text-white group-hover:text-indigo-400 transition-colors flex items-center gap-1" href="#">
+                  Hugging Face
+                  <span class="material-symbols-outlined text-[15px] text-slate-500 group-hover:text-indigo-400 transition-colors">north_east</span>
+</a>
+<span class="font-code-badge text-code-badge text-slate-400">api-inference.huggingface.co</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/20 text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+<span class="font-label-md text-[11px] font-medium">99.85%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-slate-400 line-clamp-2 mb-4">
+            Serverless high-speed inference execution on 100,000+ state-of-the-art open models covering NLP, audio synthesis, and vision.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-4">
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">AI &amp; ML</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-emerald-400">lock</span>HTTPS
+            </span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">CORS: Yes</span>
+<span class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 font-label-md text-[11px] font-medium">API Key</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+<button class="copy-btn flex items-center gap-1 text-slate-400 hover:text-white font-label-md text-[12px] px-2.5 py-1.5 rounded-lg hover:bg-white/[0.08] transition-colors" data-url="https://api-inference.huggingface.co" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-md text-[12px] font-medium px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-[0_0_12px_rgba(99,102,241,0.3)]" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 12: Resend Email -->
+<div class="api-card group flex flex-col justify-between bg-[#11131b] border border-white/[0.08] rounded-xl p-5 shadow-2xl hover:border-indigo-500/40 hover:shadow-[0_0_25px_rgba(99,102,241,0.2)] hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-slate-200 shadow-inner font-code-badge">
+<span class="material-symbols-outlined text-[22px]">mail</span>
+</div>
+<div>
+<a class="font-headline-md text-[17px] font-semibold text-white group-hover:text-indigo-400 transition-colors flex items-center gap-1" href="#">
+                  Resend Engine
+                  <span class="material-symbols-outlined text-[15px] text-slate-500 group-hover:text-indigo-400 transition-colors">north_east</span>
+</a>
+<span class="font-code-badge text-code-badge text-slate-400">api.resend.com</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/20 text-emerald-400">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+<span class="font-label-md text-[11px] font-medium">99.99%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-slate-400 line-clamp-2 mb-4">
+            Modern email sending infrastructure built for developers with React email components, instantaneous webhooks, and deliverability telemetry.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-4">
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">Developer Tools</span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-emerald-400">lock</span>HTTPS
+            </span>
+<span class="px-2.5 py-0.5 rounded-md bg-white/[0.06] border border-white/[0.06] text-slate-300 font-label-md text-[11px]">CORS: Yes</span>
+<span class="px-2.5 py-0.5 rounded-md bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 font-label-md text-[11px] font-medium">API Key</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+<button class="copy-btn flex items-center gap-1 text-slate-400 hover:text-white font-label-md text-[12px] px-2.5 py-1.5 rounded-lg hover:bg-white/[0.08] transition-colors" data-url="https://api.resend.com" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-md text-[12px] font-medium px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-all shadow-[0_0_12px_rgba(99,102,241,0.3)]" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Pagination Section -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-10 pt-6 border-t border-white/[0.06] px-2">
+<div class="font-code-badge text-code-badge text-slate-400">
+        Page <span class="font-semibold text-white">1</span> of 146
+      </div>
+<div class="flex items-center gap-1.5">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-slate-600 cursor-not-allowed font-label-md text-[12px]" disabled="" type="button">
+<span class="material-symbols-outlined text-[15px]">chevron_left</span>
+<span>Previous</span>
+</button>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg bg-indigo-600 text-white font-code-badge text-[12px] font-medium shadow-[0_0_10px_rgba(99,102,241,0.4)]">1</button>
+<button class="w-8 h-8 rounded-lg bg-white/[0.05] border border-white/[0.06] text-slate-300 hover:bg-white/[0.1] hover:text-white transition-colors font-code-badge text-[12px] font-medium">2</button>
+<button class="w-8 h-8 rounded-lg bg-white/[0.05] border border-white/[0.06] text-slate-300 hover:bg-white/[0.1] hover:text-white transition-colors font-code-badge text-[12px] font-medium">3</button>
+<button class="w-8 h-8 rounded-lg bg-white/[0.05] border border-white/[0.06] text-slate-300 hover:bg-white/[0.1] hover:text-white transition-colors font-code-badge text-[12px] font-medium">4</button>
+<span class="px-1 text-slate-600 font-code-badge text-[12px]">...</span>
+<button class="w-8 h-8 rounded-lg bg-white/[0.05] border border-white/[0.06] text-slate-300 hover:bg-white/[0.1] hover:text-white transition-colors font-code-badge text-[12px] font-medium">146</button>
+</div>
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/[0.05] border border-white/[0.08] hover:bg-white/[0.1] text-slate-200 transition-colors font-label-md text-[12px] shadow-sm" type="button">
+<span>Next</span>
+<span class="material-symbols-outlined text-[15px]">chevron_right</span>
+</button>
+</div>
+<div class="hidden sm:block">
+<a class="font-label-md text-[12px] text-indigo-400 hover:text-indigo-300 hover:underline flex items-center gap-1.5 transition-colors" href="#">
+<span>Export OpenAPI specs</span>
+<span class="material-symbols-outlined text-[15px]">download</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function () {
+    // Search input clear button visibility
+    const searchInput = document.getElementById('searchInput');
+    const clearSearch = document.getElementById('clearSearch');
+
+    if (searchInput && clearSearch) {
+      searchInput.addEventListener('input', (e) => {
+        if (e.target.value.trim().length > 0) {
+          clearSearch.classList.remove('hidden');
+        } else {
+          clearSearch.classList.add('hidden');
+        }
+      });
+
+      clearSearch.addEventListener('click', () => {
+        searchInput.value = '';
+        clearSearch.classList.add('hidden');
+        searchInput.focus();
+      });
+    }
+
+    // Command + K hotkey focus
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        searchInput && searchInput.focus();
+      }
+    });
+
+    // Category Filter Pills Toggle
+    const pills = document.querySelectorAll('.filter-pill');
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        pills.forEach((p) => {
+          p.classList.remove('bg-indigo-600', 'text-white', 'shadow-[0_0_12px_rgba(99,102,241,0.4)]', 'border-indigo-400/30', 'font-medium');
+          p.classList.add('bg-white/[0.05]', 'border-white/[0.08]', 'text-slate-300');
+        });
+        pill.classList.remove('bg-white/[0.05]', 'border-white/[0.08]', 'text-slate-300');
+        pill.classList.add('bg-indigo-600', 'text-white', 'shadow-[0_0_12px_rgba(99,102,241,0.4)]', 'border-indigo-400/30', 'font-medium');
+      });
+    });
+
+    // Copy to Clipboard Feedback Micro-interaction
+    const copyBtns = document.querySelectorAll('.copy-btn');
+    copyBtns.forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const textToCopy = btn.getAttribute('data-url') || '';
+        if (!textToCopy) return;
+
+        try {
+          await navigator.clipboard.writeText(textToCopy);
+        } catch (err) {
+          // fallback
+          const textarea = document.createElement('textarea');
+          textarea.value = textToCopy;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+        }
+
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = `
+          <span class="material-symbols-outlined text-[14px] text-emerald-400">check</span>
+          <span class="text-emerald-400 font-medium">Copied!</span>
+        `;
+        btn.classList.add('bg-emerald-500/20');
+
+        setTimeout(() => {
+          btn.innerHTML = originalHtml;
+          btn.classList.remove('bg-emerald-500/20');
+        }, 1800);
+      });
+    });
+  })();
+</script></main><footer class="w-full bg-[#0b0c10] border-t border-white/[0.08]"><div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-10"><div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/[0.06]"><div class="flex flex-col items-center md:items-start gap-1"><div class="flex items-center gap-2"><div class="w-6 h-6 rounded-lg bg-indigo-600 flex items-center justify-center text-white"><span class="material-symbols-outlined text-[14px]">hub</span></div><span class="font-headline-md text-lg font-semibold tracking-tight text-white">Nexus<span class="text-indigo-400">API</span></span></div><p class="text-slate-400 font-body-sm text-[13px]">L'index universel pour les développeurs, ingénieurs et architectes cloud.</p></div><div class="flex items-center gap-2 px-3 py-1.5 bg-white/[0.03] border border-white/[0.06] rounded-full"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span></span><span class="font-label-md text-[11px] text-slate-300">All systems operational (99.98%)</span></div></div><div class="flex flex-col md:flex-row items-center justify-between gap-4 pt-6"><div class="flex items-center gap-6 text-slate-400 font-body-sm text-[13px]"><a class="hover:text-white transition-colors" data-path="directory" href="#">Index</a><a class="hover:text-white transition-colors" data-path="categories" href="#">Catégories</a><a class="hover:text-white transition-colors" data-path="playground" href="#">Console</a><a class="hover:text-white transition-colors" data-path="documentation" href="#">Documentation</a><a class="hover:text-white transition-colors" data-path="changelog" href="#">Changelog</a></div><span class="font-code-badge text-code-badge text-slate-500">© 2025 NexusAPI Engine. Licensed under MIT.</span></div></div></footer></body></html>

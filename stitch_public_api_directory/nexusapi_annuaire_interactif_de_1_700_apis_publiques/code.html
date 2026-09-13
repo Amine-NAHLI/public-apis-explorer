@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"primary-fixed-dim":"#c0c1ff","surface-container":"#f0edf0","tertiary-container":"#008096","on-surface-variant":"#464554","secondary-container":"#6cf8bb","inverse-primary":"#c0c1ff","on-secondary":"#ffffff","outline-variant":"#c7c4d7","surface-variant":"#e5e1e4","tertiary-fixed":"#acedff","on-background":"#1c1b1d","surface-bright":"#fcf8fb","on-secondary-container":"#00714d","primary-fixed":"#e1e0ff","error-container":"#ffdad6","on-secondary-fixed-variant":"#005236","on-primary":"#ffffff","on-error":"#ffffff","secondary-fixed-dim":"#4edea3","primary-container":"#6063ee","outline":"#767586","primary":"#4648d4","secondary-fixed":"#6ffbbe","surface-container-highest":"#e5e1e4","on-error-container":"#93000a","secondary":"#006c49","tertiary":"#006577","surface-container-low":"#f6f2f5","surface":"#fcf8fb","error":"#ba1a1a","on-tertiary-fixed-variant":"#004e5c","surface-container-high":"#eae7ea","on-surface":"#1c1b1d","inverse-surface":"#313032","on-tertiary-fixed":"#001f26","on-secondary-fixed":"#002113","on-primary-fixed-variant":"#2f2ebe","surface-dim":"#dcd9dc","inverse-on-surface":"#f3f0f2","surface-container-lowest":"#ffffff","surface-tint":"#494bd6","on-primary-fixed":"#07006c","tertiary-fixed-dim":"#4cd7f6","background":"#fcf8fb","on-tertiary":"#ffffff","on-tertiary-container":"#f9fdff","on-primary-container":"#fffbff"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin":"1rem","gutter":"1rem","space-lg":"1.5rem","space-md":"1rem","space-xl":"2.5rem","space-sm":"0.5rem","gutter-desktop":"1.5rem","margin-desktop":"3rem","margin-tablet":"2rem","space-xs":"0.25rem"},"fontFamily":{"headline-lg-mobile":["Geist"],"label-pill":["Geist"],"display-hero-mobile":["Geist"],"display-hero":["Geist"],"label-code":["JetBrains Mono"],"body-lg":["Geist"],"headline-md":["Geist"],"headline-lg":["Geist"],"body-sm":["Geist"]},"fontSize":{"headline-lg-mobile":["22px",{"lineHeight":"28px","letterSpacing":"-0.02em","fontWeight":"600"}],"label-pill":["11px",{"lineHeight":"14px","letterSpacing":"0.01em","fontWeight":"500"}],"display-hero-mobile":["32px",{"lineHeight":"38px","letterSpacing":"-0.03em","fontWeight":"600"}],"display-hero":["48px",{"lineHeight":"52px","letterSpacing":"-0.035em","fontWeight":"600"}],"label-code":["12px",{"lineHeight":"16px","letterSpacing":"-0.01em","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"24px","letterSpacing":"-0.011em","fontWeight":"400"}],"headline-md":["20px",{"lineHeight":"26px","letterSpacing":"-0.02em","fontWeight":"500"}],"headline-lg":["28px",{"lineHeight":"34px","letterSpacing":"-0.025em","fontWeight":"600"}],"body-sm":["14px",{"lineHeight":"20px","letterSpacing":"-0.006em","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-sm text-body-sm text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-sm group" data-path="directory" href="#"><div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm group-hover:bg-primary-container transition-colors"><span class="material-symbols-outlined text-[20px]">hub</span></div><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-md text-headline-md font-semibold tracking-tight text-on-surface">Nexus<span class="text-primary">API</span></span></div></div></a><div class="hidden sm:inline-flex items-center gap-space-xs px-space-sm py-space-xs bg-surface-container-low rounded-full text-on-surface-variant font-label-pill text-label-pill"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span>1,742 APIs indexed</span></div></div><nav class="hidden lg:flex items-center gap-space-xs p-1 bg-surface-container-low/60 rounded-xl" data-active-classes="bg-primary-container text-on-primary-container font-medium rounded-lg"><a aria-current="page" class="px-space-md py-1.5 transition-colors bg-primary-container text-on-primary-container font-medium rounded-lg" data-path="directory" href="#">Directory</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="categories" href="#">Categories</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="playground" href="#">Playground</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="changelog" href="#">Changelog</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="submit-api" href="#">Submit API</a></nav><div class="flex items-center gap-space-sm"><button aria-label="Basculer le thème" class="w-9 h-9 flex items-center justify-center rounded-xl bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="document.documentElement.classList.toggle('dark')" type="button"><span class="material-symbols-outlined text-[18px]">dark_mode</span></button><a class="hidden md:flex items-center gap-space-xs px-space-md py-1.5 rounded-xl bg-surface-container-low hover:bg-surface-container-high text-on-surface transition-colors font-body-sm text-body-sm" data-path="github-stars" href="#"><span class="material-symbols-outlined text-[16px] text-primary">star</span><span class="font-label-code text-label-code font-medium">4.8k</span></a><a class="hidden sm:inline-flex items-center gap-space-xs px-space-md py-1.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary transition-colors font-body-sm text-body-sm font-medium shadow-sm" data-path="submit-api" href="#"><span class="material-symbols-outlined text-[16px]">add</span><span>Submit API</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Subtle Ambient Glow Background Graphic -->
+<div class="relative w-full max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop pt-space-lg pb-space-xl">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[680px] h-[320px] bg-gradient-to-b from-primary/10 via-primary-fixed-dim/5 to-transparent rounded-full blur-3xl pointer-events-none -z-10"></div>
+<!-- Hero Section -->
+<div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-space-xl">
+<!-- Floating Capsule Badge -->
+<div class="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-container-low shadow-sm mb-space-md text-on-surface-variant hover:text-on-surface transition-colors cursor-default">
+<span class="text-secondary font-medium">⚡</span>
+<span class="font-label-pill text-label-pill tracking-tight">Curated catalog of 1,742 free & public APIs</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-pill text-label-pill text-on-surface-variant font-normal">Updated hourly</span>
+</div>
+<!-- Main Headline -->
+<h1 class="font-display-hero text-display-hero text-on-surface tracking-tight mb-space-sm">
+        The Definitive <span class="bg-gradient-to-r from-primary via-primary-container to-secondary bg-clip-text text-transparent">Public API</span> Index
+      </h1>
+<!-- Subtitle -->
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl text-balance">
+        Explore, filter, and integrate over 1,700 curated APIs for your next project. Zero friction, unified specs, and instant live status.
+      </p>
+<!-- Raycast-Style Luxury Search Bar -->
+<div class="w-full mt-space-lg relative group">
+<div class="relative flex items-center w-full bg-surface-container-lowest rounded-xl shadow-md transition-all duration-200 focus-within:shadow-xl focus-within:ring-2 focus-within:ring-primary/20">
+<span class="material-symbols-outlined text-outline ml-space-md text-[22px] select-none group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full py-4 px-space-sm bg-transparent font-body-lg text-body-lg text-on-surface placeholder:text-outline-variant focus:outline-none" id="searchInput" placeholder="Search by API name, keyword, authentication, or protocol..." type="text"/>
+<button aria-label="Effacer la recherche" class="hidden text-on-surface-variant hover:text-on-surface p-1 mr-space-xs transition-colors" id="clearSearch" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+<div class="hidden sm:flex items-center gap-1 mr-space-md px-2 py-1 bg-surface-container-low rounded-lg text-on-surface-variant select-none">
+<span class="font-label-code text-label-code font-semibold">⌘</span>
+<span class="font-label-code text-label-code">K</span>
+</div>
+</div>
+</div>
+<!-- Category Filter Pills Bar -->
+<div class="w-full flex items-center gap-space-xs overflow-x-auto py-space-sm no-scrollbar mt-space-sm" id="categoryFilterContainer">
+<button class="filter-pill active-pill px-3 py-1.5 rounded-full font-label-pill text-label-pill flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 bg-primary text-on-primary shadow-sm" data-category="all">
+<span class="material-symbols-outlined text-[14px]">apps</span> All (1,742)
+        </button>
+<button class="filter-pill px-3 py-1.5 rounded-full font-label-pill text-label-pill flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 bg-surface-container-low text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-category="ai">
+<span class="material-symbols-outlined text-[14px]">psychology</span> AI & ML
+        </button>
+<button class="filter-pill px-3 py-1.5 rounded-full font-label-pill text-label-pill flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 bg-surface-container-low text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-category="finance">
+<span class="material-symbols-outlined text-[14px]">account_balance</span> Finance
+        </button>
+<button class="filter-pill px-3 py-1.5 rounded-full font-label-pill text-label-pill flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 bg-surface-container-low text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-category="devtools">
+<span class="material-symbols-outlined text-[14px]">terminal</span> Developer Tools
+        </button>
+<button class="filter-pill px-3 py-1.5 rounded-full font-label-pill text-label-pill flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 bg-surface-container-low text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-category="crypto">
+<span class="material-symbols-outlined text-[14px]">currency_bitcoin</span> Crypto
+        </button>
+<button class="filter-pill px-3 py-1.5 rounded-full font-label-pill text-label-pill flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 bg-surface-container-low text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-category="weather">
+<span class="material-symbols-outlined text-[14px]">wb_sunny</span> Weather
+        </button>
+<button class="filter-pill px-3 py-1.5 rounded-full font-label-pill text-label-pill flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 bg-surface-container-low text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-category="opendata">
+<span class="material-symbols-outlined text-[14px]">public</span> Open Data
+        </button>
+<button class="filter-pill px-3 py-1.5 rounded-full font-label-pill text-label-pill flex items-center gap-1.5 whitespace-nowrap transition-all duration-150 bg-surface-container-low text-on-surface-variant hover:bg-surface-container hover:text-on-surface" data-category="media">
+<span class="material-symbols-outlined text-[14px]">photo_library</span> Media & Audio
+        </button>
+</div>
+</div>
+<!-- Secondary Meta Toolbar: Filters & Live Count -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md py-space-sm mb-space-md bg-surface-container-low/40 rounded-xl px-space-md">
+<!-- Technical Facets Dropdowns -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- HTTPS Filter -->
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest text-on-surface font-label-pill text-label-pill pl-3 pr-7 py-1.5 rounded-lg shadow-sm focus:outline-none cursor-pointer" id="filterHttps">
+<option value="all">HTTPS: All</option>
+<option value="yes">HTTPS: Yes</option>
+<option value="optional">HTTPS: Optional</option>
+</select>
+<span class="material-symbols-outlined text-[14px] text-outline pointer-events-none absolute right-2 top-1/2 -translate-y-1/2">expand_more</span>
+</div>
+<!-- CORS Filter -->
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest text-on-surface font-label-pill text-label-pill pl-3 pr-7 py-1.5 rounded-lg shadow-sm focus:outline-none cursor-pointer" id="filterCors">
+<option value="all">CORS: All</option>
+<option value="yes">CORS: Yes</option>
+<option value="no">CORS: No</option>
+<option value="unknown">CORS: Unknown</option>
+</select>
+<span class="material-symbols-outlined text-[14px] text-outline pointer-events-none absolute right-2 top-1/2 -translate-y-1/2">expand_more</span>
+</div>
+<!-- Auth Filter -->
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest text-on-surface font-label-pill text-label-pill pl-3 pr-7 py-1.5 rounded-lg shadow-sm focus:outline-none cursor-pointer" id="filterAuth">
+<option value="all">Auth: All</option>
+<option value="no-auth">No Auth</option>
+<option value="api-key">API Key</option>
+<option value="oauth">OAuth 2.0</option>
+</select>
+<span class="material-symbols-outlined text-[14px] text-outline pointer-events-none absolute right-2 top-1/2 -translate-y-1/2">expand_more</span>
+</div>
+</div>
+<!-- Live Count & Sort View -->
+<div class="flex items-center gap-space-md justify-between w-full md:w-auto">
+<span class="font-label-code text-label-code text-on-surface-variant" id="resultsCount">
+          Showing <span class="font-semibold text-on-surface">12</span> of 1,742 APIs
+        </span>
+<div class="flex items-center gap-1">
+<span class="font-label-pill text-label-pill text-on-surface-variant hidden sm:inline">Sort:</span>
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest text-on-surface font-label-pill text-label-pill pl-2 pr-6 py-1.5 rounded-lg shadow-sm focus:outline-none cursor-pointer">
+<option>Most Popular</option>
+<option>Recently Added</option>
+<option>Lowest Latency</option>
+<option>Alphabetical</option>
+</select>
+<span class="material-symbols-outlined text-[14px] text-outline pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- API Grid Section (3 Columns Responsive) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter-desktop mt-space-md" id="apiGrid">
+<!-- Card 1: OpenAI -->
+<div class="api-card group flex flex-col justify-between bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+<div>
+<!-- Header -->
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary shadow-sm font-label-code text-body-lg font-bold">
+<span class="material-symbols-outlined text-[22px]">neurology</span>
+</div>
+<div>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-1" href="#">
+                  OpenAI API
+                  <span class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary transition-colors">north_east</span>
+</a>
+<span class="font-label-code text-label-code text-on-surface-variant">api.openai.com/v1</span>
+</div>
+</div>
+<!-- Ping Status -->
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-pill text-label-pill font-medium">99.9%</span>
+</div>
+</div>
+<!-- Description -->
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-md">
+            Direct access to state-of-the-art transformer models including GPT-4o, DALL·E 3, and Whisper for text, voice, and vision.
+          </p>
+<!-- Badges -->
+<div class="flex flex-wrap items-center gap-1.5 mb-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-pill text-label-pill">AI & ML</span>
+<span class="px-2 py-0.5 rounded-md bg-secondary-container/30 text-on-secondary-container font-label-pill text-label-pill flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">lock</span>HTTPS
+            </span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-low text-on-surface font-label-pill text-label-pill">CORS: Yes</span>
+<span class="px-2 py-0.5 rounded-md bg-primary-fixed text-on-primary-fixed-variant font-label-pill text-label-pill font-medium">API Key</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-lowest">
+<button class="copy-btn flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-pill text-label-pill px-2.5 py-1.5 rounded-lg hover:bg-surface-container transition-colors" data-url="https://api.openai.com/v1" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-pill text-label-pill font-semibold px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary transition-colors shadow-sm" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2: Stripe Connect -->
+<div class="api-card group flex flex-col justify-between bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary shadow-sm font-label-code text-body-lg font-bold">
+<span class="material-symbols-outlined text-[22px]">payments</span>
+</div>
+<div>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-1" href="#">
+                  Stripe Engine
+                  <span class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary transition-colors">north_east</span>
+</a>
+<span class="font-label-code text-label-code text-on-surface-variant">api.stripe.com/v1</span>
+</div>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-pill text-label-pill font-medium">99.99%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-md">
+            Global payment processing infrastructure supporting credit cards, recurring billing, multi-party marketplace payouts, and fraud prevention.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-pill text-label-pill">Finance</span>
+<span class="px-2 py-0.5 rounded-md bg-secondary-container/30 text-on-secondary-container font-label-pill text-label-pill flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">lock</span>HTTPS
+            </span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-low text-on-surface font-label-pill text-label-pill">CORS: Yes</span>
+<span class="px-2 py-0.5 rounded-md bg-primary-fixed text-on-primary-fixed-variant font-label-pill text-label-pill font-medium">API Key</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-lowest">
+<button class="copy-btn flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-pill text-label-pill px-2.5 py-1.5 rounded-lg hover:bg-surface-container transition-colors" data-url="https://api.stripe.com/v1" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-pill text-label-pill font-semibold px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary transition-colors shadow-sm" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3: CoinGecko -->
+<div class="api-card group flex flex-col justify-between bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-tertiary shadow-sm font-label-code text-body-lg font-bold">
+<span class="material-symbols-outlined text-[22px]">toll</span>
+</div>
+<div>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-1" href="#">
+                  CoinGecko v3
+                  <span class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary transition-colors">north_east</span>
+</a>
+<span class="font-label-code text-label-code text-on-surface-variant">api.coingecko.com/v3</span>
+</div>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-pill text-label-pill font-medium">99.8%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-md">
+            Cryptocurrency data index tracking real-time price feeds, tickers, historical market metrics, trading volumes, and DEX contracts.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-pill text-label-pill">Crypto</span>
+<span class="px-2 py-0.5 rounded-md bg-secondary-container/30 text-on-secondary-container font-label-pill text-label-pill flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">lock</span>HTTPS
+            </span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-low text-on-surface font-label-pill text-label-pill">CORS: Yes</span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-pill text-label-pill font-medium">No Auth</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-lowest">
+<button class="copy-btn flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-pill text-label-pill px-2.5 py-1.5 rounded-lg hover:bg-surface-container transition-colors" data-url="https://api.coingecko.com/api/v3" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-pill text-label-pill font-semibold px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary transition-colors shadow-sm" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 4: OpenWeatherMap -->
+<div class="api-card group flex flex-col justify-between bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary shadow-sm font-label-code text-body-lg font-bold">
+<span class="material-symbols-outlined text-[22px]">cloud_queue</span>
+</div>
+<div>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-1" href="#">
+                  OpenWeather
+                  <span class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary transition-colors">north_east</span>
+</a>
+<span class="font-label-code text-label-code text-on-surface-variant">api.openweathermap.org</span>
+</div>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-pill text-label-pill font-medium">99.95%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-md">
+            Hyperlocal meteorological forecasts, solar radiation, historical atmospheric charts, and precipitation radars for any geolocation.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-pill text-label-pill">Weather</span>
+<span class="px-2 py-0.5 rounded-md bg-secondary-container/30 text-on-secondary-container font-label-pill text-label-pill flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">lock</span>HTTPS
+            </span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-low text-on-surface font-label-pill text-label-pill">CORS: Yes</span>
+<span class="px-2 py-0.5 rounded-md bg-primary-fixed text-on-primary-fixed-variant font-label-pill text-label-pill font-medium">API Key</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-lowest">
+<button class="copy-btn flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-pill text-label-pill px-2.5 py-1.5 rounded-lg hover:bg-surface-container transition-colors" data-url="https://api.openweathermap.org/data/2.5" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-pill text-label-pill font-semibold px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary transition-colors shadow-sm" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 5: GitHub REST -->
+<div class="api-card group flex flex-col justify-between bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-on-surface shadow-sm font-label-code text-body-lg font-bold">
+<span class="material-symbols-outlined text-[22px]">code</span>
+</div>
+<div>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-1" href="#">
+                  GitHub REST
+                  <span class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary transition-colors">north_east</span>
+</a>
+<span class="font-label-code text-label-code text-on-surface-variant">api.github.com</span>
+</div>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-pill text-label-pill font-medium">99.98%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-md">
+            Programmatic control over repositories, pull requests, automated GitHub Actions workflows, user profiles, and webhooks.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-pill text-label-pill">Developer Tools</span>
+<span class="px-2 py-0.5 rounded-md bg-secondary-container/30 text-on-secondary-container font-label-pill text-label-pill flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">lock</span>HTTPS
+            </span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-low text-on-surface font-label-pill text-label-pill">CORS: Yes</span>
+<span class="px-2 py-0.5 rounded-md bg-primary-fixed-dim text-on-primary-fixed-variant font-label-pill text-label-pill font-medium">OAuth 2.0</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-lowest">
+<button class="copy-btn flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-pill text-label-pill px-2.5 py-1.5 rounded-lg hover:bg-surface-container transition-colors" data-url="https://api.github.com" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-pill text-label-pill font-semibold px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary transition-colors shadow-sm" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 6: DeepL Translate -->
+<div class="api-card group flex flex-col justify-between bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary shadow-sm font-label-code text-body-lg font-bold">
+<span class="material-symbols-outlined text-[22px]">translate</span>
+</div>
+<div>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-1" href="#">
+                  DeepL Engine
+                  <span class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary transition-colors">north_east</span>
+</a>
+<span class="font-label-code text-label-code text-on-surface-variant">api-free.deepl.com/v2</span>
+</div>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-pill text-label-pill font-medium">99.9%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-md">
+            World-class neural machine translation for sentences and documents with tone customization, glossary support, and language detection.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-pill text-label-pill">AI & ML</span>
+<span class="px-2 py-0.5 rounded-md bg-secondary-container/30 text-on-secondary-container font-label-pill text-label-pill flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">lock</span>HTTPS
+            </span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-low text-on-surface font-label-pill text-label-pill">CORS: Yes</span>
+<span class="px-2 py-0.5 rounded-md bg-primary-fixed text-on-primary-fixed-variant font-label-pill text-label-pill font-medium">API Key</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-lowest">
+<button class="copy-btn flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-pill text-label-pill px-2.5 py-1.5 rounded-lg hover:bg-surface-container transition-colors" data-url="https://api-free.deepl.com/v2" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-pill text-label-pill font-semibold px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary transition-colors shadow-sm" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 7: Supabase PostgREST -->
+<div class="api-card group flex flex-col justify-between bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-secondary shadow-sm font-label-code text-body-lg font-bold">
+<span class="material-symbols-outlined text-[22px]">database</span>
+</div>
+<div>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-1" href="#">
+                  Supabase API
+                  <span class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary transition-colors">north_east</span>
+</a>
+<span class="font-label-code text-label-code text-on-surface-variant">project.supabase.co/rest</span>
+</div>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-pill text-label-pill font-medium">99.99%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-md">
+            Auto-generated instant RESTful and GraphQL APIs over PostgreSQL databases with integrated Row Level Security policies.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-pill text-label-pill">Developer Tools</span>
+<span class="px-2 py-0.5 rounded-md bg-secondary-container/30 text-on-secondary-container font-label-pill text-label-pill flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">lock</span>HTTPS
+            </span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-low text-on-surface font-label-pill text-label-pill">CORS: Yes</span>
+<span class="px-2 py-0.5 rounded-md bg-primary-fixed text-on-primary-fixed-variant font-label-pill text-label-pill font-medium">API Key</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-lowest">
+<button class="copy-btn flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-pill text-label-pill px-2.5 py-1.5 rounded-lg hover:bg-surface-container transition-colors" data-url="https://supabase.com/docs/guides/api" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-pill text-label-pill font-semibold px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary transition-colors shadow-sm" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 8: Unsplash Photo Index -->
+<div class="api-card group flex flex-col justify-between bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-on-surface shadow-sm font-label-code text-body-lg font-bold">
+<span class="material-symbols-outlined text-[22px]">photo_camera</span>
+</div>
+<div>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-1" href="#">
+                  Unsplash REST
+                  <span class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary transition-colors">north_east</span>
+</a>
+<span class="font-label-code text-label-code text-on-surface-variant">api.unsplash.com</span>
+</div>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-pill text-label-pill font-medium">99.8%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-md">
+            Rich programmatic catalog of 5M+ high-resolution, community-submitted creative photographs with geometric color tagging.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-pill text-label-pill">Media</span>
+<span class="px-2 py-0.5 rounded-md bg-secondary-container/30 text-on-secondary-container font-label-pill text-label-pill flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">lock</span>HTTPS
+            </span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-low text-on-surface font-label-pill text-label-pill">CORS: Yes</span>
+<span class="px-2 py-0.5 rounded-md bg-primary-fixed-dim text-on-primary-fixed-variant font-label-pill text-label-pill font-medium">OAuth 2.0</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-lowest">
+<button class="copy-btn flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-pill text-label-pill px-2.5 py-1.5 rounded-lg hover:bg-surface-container transition-colors" data-url="https://api.unsplash.com" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-pill text-label-pill font-semibold px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary transition-colors shadow-sm" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 9: NASA Open APIs -->
+<div class="api-card group flex flex-col justify-between bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary shadow-sm font-label-code text-body-lg font-bold">
+<span class="material-symbols-outlined text-[22px]">rocket_launch</span>
+</div>
+<div>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-1" href="#">
+                  NASA APIs
+                  <span class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary transition-colors">north_east</span>
+</a>
+<span class="font-label-code text-label-code text-on-surface-variant">api.nasa.gov</span>
+</div>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-pill text-label-pill font-medium">99.7%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-md">
+            Astrophysical imagery, Mars Curiosity and Perseverance rover raw telemetry, near-Earth asteroid tracking, and space observation.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-pill text-label-pill">Open Data</span>
+<span class="px-2 py-0.5 rounded-md bg-secondary-container/30 text-on-secondary-container font-label-pill text-label-pill flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">lock</span>HTTPS
+            </span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-low text-on-surface font-label-pill text-label-pill">CORS: Yes</span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-pill text-label-pill font-medium">No Auth</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-lowest">
+<button class="copy-btn flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-pill text-label-pill px-2.5 py-1.5 rounded-lg hover:bg-surface-container transition-colors" data-url="https://api.nasa.gov" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-pill text-label-pill font-semibold px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary transition-colors shadow-sm" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 10: Spotify Web API -->
+<div class="api-card group flex flex-col justify-between bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-secondary shadow-sm font-label-code text-body-lg font-bold">
+<span class="material-symbols-outlined text-[22px]">graphic_eq</span>
+</div>
+<div>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-1" href="#">
+                  Spotify API
+                  <span class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary transition-colors">north_east</span>
+</a>
+<span class="font-label-code text-label-code text-on-surface-variant">api.spotify.com/v1</span>
+</div>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-pill text-label-pill font-medium">99.95%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-md">
+            Query 100M+ music tracks, albums, curated user playlists, audio analysis vectors, and control playback across connected devices.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-pill text-label-pill">Media</span>
+<span class="px-2 py-0.5 rounded-md bg-secondary-container/30 text-on-secondary-container font-label-pill text-label-pill flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">lock</span>HTTPS
+            </span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-low text-on-surface font-label-pill text-label-pill">CORS: Yes</span>
+<span class="px-2 py-0.5 rounded-md bg-primary-fixed-dim text-on-primary-fixed-variant font-label-pill text-label-pill font-medium">OAuth 2.0</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-lowest">
+<button class="copy-btn flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-pill text-label-pill px-2.5 py-1.5 rounded-lg hover:bg-surface-container transition-colors" data-url="https://api.spotify.com/v1" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-pill text-label-pill font-semibold px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary transition-colors shadow-sm" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 11: HuggingFace Inference -->
+<div class="api-card group flex flex-col justify-between bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary shadow-sm font-label-code text-body-lg font-bold">
+<span class="material-symbols-outlined text-[22px]">smart_toy</span>
+</div>
+<div>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-1" href="#">
+                  Hugging Face
+                  <span class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary transition-colors">north_east</span>
+</a>
+<span class="font-label-code text-label-code text-on-surface-variant">api-inference.huggingface.co</span>
+</div>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-pill text-label-pill font-medium">99.85%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-md">
+            Serverless high-speed inference execution on 100,000+ state-of-the-art open models covering NLP, audio synthesis, and vision.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-pill text-label-pill">AI & ML</span>
+<span class="px-2 py-0.5 rounded-md bg-secondary-container/30 text-on-secondary-container font-label-pill text-label-pill flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">lock</span>HTTPS
+            </span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-low text-on-surface font-label-pill text-label-pill">CORS: Yes</span>
+<span class="px-2 py-0.5 rounded-md bg-primary-fixed text-on-primary-fixed-variant font-label-pill text-label-pill font-medium">API Key</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-lowest">
+<button class="copy-btn flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-pill text-label-pill px-2.5 py-1.5 rounded-lg hover:bg-surface-container transition-colors" data-url="https://api-inference.huggingface.co" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-pill text-label-pill font-semibold px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary transition-colors shadow-sm" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 12: Resend Email -->
+<div class="api-card group flex flex-col justify-between bg-surface-container-lowest rounded-xl p-space-md shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-on-surface shadow-sm font-label-code text-body-lg font-bold">
+<span class="material-symbols-outlined text-[22px]">mail</span>
+</div>
+<div>
+<a class="font-headline-md text-headline-md font-semibold text-on-surface group-hover:text-primary transition-colors flex items-center gap-1" href="#">
+                  Resend Engine
+                  <span class="material-symbols-outlined text-[16px] text-outline group-hover:text-primary transition-colors">north_east</span>
+</a>
+<span class="font-label-code text-label-code text-on-surface-variant">api.resend.com</span>
+</div>
+</div>
+<div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-pill text-label-pill font-medium">99.99%</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 mb-space-md">
+            Modern email sending infrastructure built for developers with React email components, instantaneous webhooks, and deliverability telemetry.
+          </p>
+<div class="flex flex-wrap items-center gap-1.5 mb-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant font-label-pill text-label-pill">Developer Tools</span>
+<span class="px-2 py-0.5 rounded-md bg-secondary-container/30 text-on-secondary-container font-label-pill text-label-pill flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">lock</span>HTTPS
+            </span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container-low text-on-surface font-label-pill text-label-pill">CORS: Yes</span>
+<span class="px-2 py-0.5 rounded-md bg-primary-fixed text-on-primary-fixed-variant font-label-pill text-label-pill font-medium">API Key</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-space-sm bg-surface-container-lowest">
+<button class="copy-btn flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-pill text-label-pill px-2.5 py-1.5 rounded-lg hover:bg-surface-container transition-colors" data-url="https://api.resend.com" type="button">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span>Copy URL</span>
+</button>
+<a class="flex items-center gap-1 font-label-pill text-label-pill font-semibold px-3 py-1.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary transition-colors shadow-sm" href="#">
+<span>Docs</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Pagination Section -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md mt-space-xl pt-space-lg bg-surface-container-low/30 rounded-xl px-space-md">
+<div class="font-label-code text-label-code text-on-surface-variant">
+        Page <span class="font-semibold text-on-surface">1</span> of 146
+      </div>
+<div class="flex items-center gap-1">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container-low text-outline-variant cursor-not-allowed font-label-pill text-label-pill" disabled="" type="button">
+<span class="material-symbols-outlined text-[14px]">chevron_left</span>
+<span>Previous</span>
+</button>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg bg-primary text-on-primary font-label-code text-label-code font-medium shadow-sm">1</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container transition-colors font-label-code text-label-code font-medium">2</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container transition-colors font-label-code text-label-code font-medium">3</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container transition-colors font-label-code text-label-code font-medium">4</button>
+<span class="px-1 text-outline font-label-code text-label-code">...</span>
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container transition-colors font-label-code text-label-code font-medium">146</button>
+</div>
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface transition-colors font-label-pill text-label-pill shadow-sm" type="button">
+<span>Next</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</button>
+</div>
+<div class="hidden sm:block">
+<a class="font-label-pill text-label-pill text-primary hover:underline flex items-center gap-1" href="#">
+<span>Export OpenAPI specs</span>
+<span class="material-symbols-outlined text-[14px]">download</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function () {
+    // Search input clear button visibility
+    const searchInput = document.getElementById('searchInput');
+    const clearSearch = document.getElementById('clearSearch');
+
+    if (searchInput && clearSearch) {
+      searchInput.addEventListener('input', (e) => {
+        if (e.target.value.trim().length > 0) {
+          clearSearch.classList.remove('hidden');
+        } else {
+          clearSearch.classList.add('hidden');
+        }
+      });
+
+      clearSearch.addEventListener('click', () => {
+        searchInput.value = '';
+        clearSearch.classList.add('hidden');
+        searchInput.focus();
+      });
+    }
+
+    // Command + K hotkey focus
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        searchInput && searchInput.focus();
+      }
+    });
+
+    // Category Filter Pills Toggle
+    const pills = document.querySelectorAll('.filter-pill');
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        pills.forEach((p) => {
+          p.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+          p.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+        });
+        pill.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+        pill.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+      });
+    });
+
+    // Copy to Clipboard Feedback Micro-interaction
+    const copyBtns = document.querySelectorAll('.copy-btn');
+    copyBtns.forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const textToCopy = btn.getAttribute('data-url') || '';
+        if (!textToCopy) return;
+
+        try {
+          await navigator.clipboard.writeText(textToCopy);
+        } catch (err) {
+          // fallback
+          const textarea = document.createElement('textarea');
+          textarea.value = textToCopy;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+        }
+
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = `
+          <span class="material-symbols-outlined text-[14px] text-secondary">check</span>
+          <span class="text-secondary font-medium">Copied!</span>
+        `;
+        btn.classList.add('bg-secondary-container/40');
+
+        setTimeout(() => {
+          btn.innerHTML = originalHtml;
+          btn.classList.remove('bg-secondary-container/40');
+        }, 1800);
+      });
+    });
+  })();
+</script></main><footer class="w-full bg-surface-container-lowest shadow-[0_-1px_8px_rgba(0,0,0,0.02)]"><div class="max-w-7xl mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop py-space-xl"><div class="flex flex-col md:flex-row items-center justify-between gap-space-lg pb-space-lg"><div class="flex flex-col items-center md:items-start gap-space-xs"><div class="flex items-center gap-space-sm"><div class="w-6 h-6 rounded-lg bg-primary flex items-center justify-center text-on-primary"><span class="material-symbols-outlined text-[14px]">hub</span></div><span class="font-headline-md text-headline-md font-semibold tracking-tight text-on-surface">NexusAPI</span></div><p class="text-on-surface-variant font-body-sm text-body-sm">L'index universel pour les développeurs, ingénieurs et architectes cloud.</p></div><div class="flex items-center gap-space-sm px-space-md py-1.5 bg-surface-container-low rounded-full"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span></span><span class="font-label-pill text-label-pill text-on-surface-variant">All systems operational (99.98%)</span></div></div><div class="flex flex-col md:flex-row items-center justify-between gap-space-md pt-space-lg bg-surface-container-low/30 rounded-xl px-space-md"><div class="flex items-center gap-space-lg text-on-surface-variant font-body-sm text-body-sm"><a class="hover:text-on-surface transition-colors" data-path="directory" href="#">Index</a><a class="hover:text-on-surface transition-colors" data-path="categories" href="#">Catégories</a><a class="hover:text-on-surface transition-colors" data-path="playground" href="#">Console</a><a class="hover:text-on-surface transition-colors" data-path="documentation" href="#">Documentation</a><a class="hover:text-on-surface transition-colors" data-path="changelog" href="#">Changelog</a></div><span class="font-label-code text-label-code text-on-surface-variant">© 2025 NexusAPI Engine. Licensed under MIT.</span></div></div></footer></body></html>
