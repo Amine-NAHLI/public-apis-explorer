@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
-import { Search, ExternalLink, Shield, Check, Globe, Moon, Sun, Heart, Code2, Copy, X, Sparkles, Tag, Key, Lock, ChevronRight, HelpCircle } from 'lucide-react';
+import { Search, ExternalLink, Shield, Check, Globe, Moon, Sun, Heart, Code2, Copy, X, Sparkles, Tag, Key, Lock, ChevronRight, HelpCircle, Dices, ArrowDownAZ, ArrowUpZA } from 'lucide-react';
 import { getAllApis, getCategories, searchApis, ApiEntry } from '@/lib/api-service';
 import { useTheme } from 'next-themes';
 
@@ -14,14 +14,16 @@ export default function Home() {
   const [auth, setAuth] = useState('All');
   const [cors, setCors] = useState('All');
   const [https, setHttps] = useState('All');
+  const [sortOrder, setSortOrder] = useState<'none' | 'asc' | 'desc'>('none');
   
   const [bookmarks, setBookmarks] = useState<Set<string>>(new Set());
   const [showBookmarksOnly, setShowBookmarksOnly] = useState(false);
   const [selectedApi, setSelectedApi] = useState<ApiEntry | null>(null);
   const [showHelpModal, setShowHelpModal] = useState(false);
   const [page, setPage] = useState(1);
+  const [snippetLanguage, setSnippetLanguage] = useState<'javascript' | 'python' | 'curl' | 'nodejs' | 'go'>('javascript');
+  
   const itemsPerPage = 24;
-
   const categories = useMemo(() => ['All', ...getCategories()], []);
 
   useEffect(() => {
@@ -41,8 +43,16 @@ export default function Home() {
   const filteredApis = useMemo(() => {
     let result = searchApis(query, category, auth, cors, https);
     if (showBookmarksOnly) result = result.filter(api => bookmarks.has(api.name));
+    
+    // Sort logic
+    if (sortOrder === 'asc') {
+      result = [...result].sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortOrder === 'desc') {
+      result = [...result].sort((a, b) => b.name.localeCompare(a.name));
+    }
+    
     return result;
-  }, [query, category, auth, cors, https, showBookmarksOnly, bookmarks]);
+  }, [query, category, auth, cors, https, showBookmarksOnly, bookmarks, sortOrder]);
 
   const paginatedApis = useMemo(() => {
     const start = (page - 1) * itemsPerPage;
@@ -51,10 +61,32 @@ export default function Home() {
 
   const totalPages = Math.ceil(filteredApis.length / itemsPerPage);
 
-  useEffect(() => setPage(1), [query, category, auth, cors, https, showBookmarksOnly]);
+  useEffect(() => setPage(1), [query, category, auth, cors, https, sortOrder, showBookmarksOnly]);
+
+  const handleRandomApi = () => {
+    if (filteredApis.length === 0) return;
+    const randomIdx = Math.floor(Math.random() * filteredApis.length);
+    setSelectedApi(filteredApis[randomIdx]);
+  };
+
+  const generateSnippet = (api: ApiEntry, lang: string) => {
+    switch(lang) {
+      case 'curl':
+        return `curl -X GET "${api.link}" \\\n  -H "Accept: application/json"`;
+      case 'python':
+        return `import requests\n\nurl = "${api.link}"\nresponse = requests.get(url)\n\nprint(response.json())`;
+      case 'nodejs':
+        return `const axios = require('axios');\n\naxios.get('${api.link}')\n  .then(response => {\n    console.log(response.data);\n  })\n  .catch(error => {\n    console.error(error);\n  });`;
+      case 'go':
+        return `package main\n\nimport (\n\t"fmt"\n\t"io/ioutil"\n\t"net/http"\n)\n\nfunc main() {\n\tres, err := http.Get("${api.link}")\n\tif err != nil {\n\t\tpanic(err)\n\t}\n\tdefer res.Body.Close()\n\n\tbody, _ := ioutil.ReadAll(res.Body)\n\tfmt.Println(string(body))\n}`;
+      case 'javascript':
+      default:
+        return `// Fetch data from ${api.name}\nfetch('${api.link}')\n  .then(response => response.json())\n  .then(data => console.log(data));`;
+    }
+  };
 
   const copySnippet = (api: ApiEntry) => {
-    const snippet = `// Fetch data from ${api.name}\nfetch('${api.link}')\n  .then(response => response.json())\n  .then(data => console.log(data));`;
+    const snippet = generateSnippet(api, snippetLanguage);
     navigator.clipboard.writeText(snippet);
     alert('Snippet copied to clipboard!');
   };
@@ -64,10 +96,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#FAFAFA] dark:bg-black text-neutral-900 dark:text-neutral-100 font-sans selection:bg-neutral-200 dark:selection:bg-neutral-800 transition-colors duration-300">
       
-      {/* Vercel-style Top Border Accent */}
       <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent"></div>
 
-      {/* Header Linear Style */}
       <header className="sticky top-0 z-50 bg-[#FAFAFA]/80 dark:bg-black/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2 cursor-pointer">
@@ -102,11 +132,8 @@ export default function Home() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative">
-        
-        {/* Subtle Grid Background */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10"></div>
 
-        {/* Hero Section */}
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-neutral-900/50 backdrop-blur-sm mb-8">
             <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
@@ -124,9 +151,9 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Search Command Bar */}
-        <div className="max-w-4xl mx-auto mb-12">
-          <div className="relative group">
+        {/* Search & Random Bar */}
+        <div className="max-w-4xl mx-auto mb-12 flex items-center gap-3">
+          <div className="relative group flex-1">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Search className="h-5 w-5 text-neutral-400" />
             </div>
@@ -143,16 +170,23 @@ export default function Home() {
               </button>
             )}
           </div>
+          <button 
+            onClick={handleRandomApi}
+            title="Surprise me with a random API"
+            className="flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-xl bg-white dark:bg-[#0a0a0a] border border-neutral-200 dark:border-neutral-800 text-neutral-500 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors shadow-sm"
+          >
+            <Dices className="h-6 w-6" />
+          </button>
         </div>
 
-        {/* Filters Bar (Linear Style) */}
+        {/* Filters Bar */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 py-4 mb-8 border-b border-neutral-200 dark:border-neutral-900">
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar w-full md:w-auto">
+          <div className="flex flex-wrap items-center gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar w-full md:w-auto">
             <select className="appearance-none bg-white dark:bg-[#0a0a0a] text-neutral-700 dark:text-neutral-300 text-[13px] font-medium px-3 py-1.5 rounded-md border border-neutral-200 dark:border-neutral-800 focus:outline-none hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors cursor-pointer min-w-[120px]" value={category} onChange={e => setCategory(e.target.value)}>
               {categories.map(c => <option key={c} value={c}>{c === 'All' ? 'All Categories' : c}</option>)}
             </select>
             
-            <div className="w-px h-4 bg-neutral-300 dark:bg-neutral-800 mx-2"></div>
+            <div className="w-px h-4 bg-neutral-300 dark:bg-neutral-800 mx-1"></div>
 
             <select className="appearance-none bg-white dark:bg-[#0a0a0a] text-neutral-700 dark:text-neutral-300 text-[13px] font-medium px-3 py-1.5 rounded-md border border-neutral-200 dark:border-neutral-800 focus:outline-none hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors cursor-pointer" value={auth} onChange={e => setAuth(e.target.value)}>
               <option value="All">Auth: Any</option>
@@ -170,6 +204,14 @@ export default function Home() {
               <option value="Yes">CORS Enabled</option>
               <option value="No">No CORS</option>
             </select>
+
+            <div className="w-px h-4 bg-neutral-300 dark:bg-neutral-800 mx-1"></div>
+
+            <div className="flex items-center gap-1 border border-neutral-200 dark:border-neutral-800 rounded-md bg-white dark:bg-[#0a0a0a] p-0.5">
+              <button onClick={() => setSortOrder('none')} className={`px-2 py-1 text-[12px] font-medium rounded-sm transition-colors ${sortOrder === 'none' ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white' : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-300'}`}>Default</button>
+              <button onClick={() => setSortOrder('asc')} className={`px-2 py-1 text-[12px] font-medium rounded-sm transition-colors flex items-center gap-1 ${sortOrder === 'asc' ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white' : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-300'}`}><ArrowDownAZ className="w-3.5 h-3.5"/> A-Z</button>
+              <button onClick={() => setSortOrder('desc')} className={`px-2 py-1 text-[12px] font-medium rounded-sm transition-colors flex items-center gap-1 ${sortOrder === 'desc' ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white' : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-300'}`}><ArrowUpZA className="w-3.5 h-3.5"/> Z-A</button>
+            </div>
           </div>
           
           <div className="flex items-center text-[13px] text-neutral-500 dark:text-neutral-500 font-medium whitespace-nowrap">
@@ -177,7 +219,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* API Grid (Linear Style) */}
+        {/* API Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
           {paginatedApis.map((api, idx) => {
             const isBookmarked = bookmarks.has(api.name);
@@ -228,7 +270,7 @@ export default function Home() {
           )})}
         </div>
         
-        {/* Pagination (Minimalist) */}
+        {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex justify-center items-center gap-4 mt-8">
             <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} className="p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-500 hover:text-neutral-900 dark:hover:text-white disabled:opacity-30 transition-colors">
@@ -244,24 +286,42 @@ export default function Home() {
         )}
       </main>
 
-      {/* Snippet Modal */}
+      {/* Advanced Snippet Modal */}
       {selectedApi && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-white/50 dark:bg-black/50 backdrop-blur-sm" onClick={() => setSelectedApi(null)}>
-          <div className="bg-white dark:bg-[#0a0a0a] rounded-xl max-w-lg w-full p-6 shadow-2xl border border-neutral-200 dark:border-neutral-800" onClick={e => e.stopPropagation()}>
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-[15px] font-semibold text-neutral-900 dark:text-white">{selectedApi.name} Integration</h3>
+          <div className="bg-white dark:bg-[#0a0a0a] rounded-xl max-w-2xl w-full shadow-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden" onClick={e => e.stopPropagation()}>
+            <div className="px-6 py-5 border-b border-neutral-200 dark:border-neutral-800 flex justify-between items-center bg-[#FAFAFA] dark:bg-[#0a0a0a]">
+              <h3 className="text-[16px] font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
+                <Code2 className="w-4 h-4 text-neutral-500" /> Integrate {selectedApi.name}
+              </h3>
               <button onClick={() => setSelectedApi(null)} className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"><X className="w-4 h-4"/></button>
             </div>
-            <div className="relative group">
-              <pre className="bg-[#111] text-neutral-300 p-4 rounded-lg text-[13px] font-mono overflow-x-auto border border-neutral-800">
-                <code>{`// Example usage
-fetch('${selectedApi.link}')
-  .then(response => response.json())
-  .then(data => console.log(data));`}</code>
-              </pre>
-              <button onClick={() => copySnippet(selectedApi)} className="absolute top-2 right-2 p-1.5 bg-neutral-800 rounded-md text-neutral-400 hover:text-white transition-colors">
-                <Copy className="w-4 h-4" />
-              </button>
+            
+            {/* Language Tabs */}
+            <div className="flex border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#050505] px-2 pt-2 gap-1 overflow-x-auto">
+              {(['javascript', 'python', 'curl', 'nodejs', 'go'] as const).map(lang => (
+                <button 
+                  key={lang}
+                  onClick={() => setSnippetLanguage(lang)}
+                  className={`px-4 py-2 text-[13px] font-medium rounded-t-lg transition-colors border-b-2 ${snippetLanguage === lang ? 'border-neutral-900 dark:border-white text-neutral-900 dark:text-white bg-neutral-50 dark:bg-[#111]' : 'border-transparent text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-[#111]'}`}
+                >
+                  {lang === 'javascript' ? 'JavaScript (Fetch)' : 
+                   lang === 'python' ? 'Python (Requests)' : 
+                   lang === 'nodejs' ? 'Node.js (Axios)' : 
+                   lang === 'go' ? 'Go' : 'cURL'}
+                </button>
+              ))}
+            </div>
+
+            <div className="p-6 bg-white dark:bg-[#050505]">
+              <div className="relative group">
+                <pre className="bg-[#111] text-neutral-300 p-5 rounded-lg text-[13px] font-mono overflow-x-auto border border-neutral-800">
+                  <code>{generateSnippet(selectedApi, snippetLanguage)}</code>
+                </pre>
+                <button onClick={() => copySnippet(selectedApi)} className="absolute top-3 right-3 p-2 bg-neutral-800 rounded-md text-neutral-400 hover:text-white transition-colors shadow-sm" title="Copy to clipboard">
+                  <Copy className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
