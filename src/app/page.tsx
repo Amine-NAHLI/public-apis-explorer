@@ -7,51 +7,6 @@ import { useTheme } from 'next-themes';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
 
-function HealthBadge({ apiLink, appLanguage }: { apiLink: string; appLanguage: string }) {
-  const [status, setStatus] = useState<'checking' | 'online' | 'offline'>('checking');
-  const badgeRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    let controller: AbortController | null = null;
-    let observer: IntersectionObserver;
-
-    observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && status === 'checking') {
-        controller = new AbortController();
-        fetch(apiLink, { method: 'GET', signal: controller.signal })
-          .then(res => setStatus(res.ok ? 'online' : 'offline'))
-          .catch(() => setStatus('offline'));
-        
-        // Disconnect after first check
-        observer.disconnect();
-      }
-    }, { threshold: 0.1 });
-
-    if (badgeRef.current) observer.observe(badgeRef.current);
-    
-    return () => {
-      observer.disconnect();
-      if (controller) controller.abort();
-    };
-  }, [apiLink, status]);
-
-  if (status === 'checking') {
-    return (
-      <span ref={badgeRef} className="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 text-neutral-500 text-[10px] font-medium rounded flex items-center gap-1.5" title={appLanguage === 'fr' ? 'Vérification du statut...' : 'Checking status...'}>
-        <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-pulse"></span>
-        Check
-      </span>
-    );
-  }
-
-  return (
-    <span className={`px-2 py-1 text-[10px] font-medium rounded flex items-center gap-1.5 ${status === 'online' ? 'bg-green-50 dark:bg-green-500/10 text-green-600 dark:text-green-400' : 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400'}`}>
-      <span className={`w-1.5 h-1.5 rounded-full ${status === 'online' ? 'bg-green-500' : 'bg-red-500'}`}></span>
-      {status === 'online' ? 'Online' : 'Offline'}
-    </span>
-  );
-}
-
 export default function Home() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -492,7 +447,6 @@ export default function Home() {
                   <span className="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 text-[10px] font-medium rounded">
                     {api.https.toLowerCase() === 'yes' ? 'HTTPS' : 'HTTP'}
                   </span>
-                  {api.cors.toLowerCase() === 'yes' && <HealthBadge apiLink={api.link} appLanguage={appLanguage} />}
                 </div>
 
                 <p className="text-[14px] text-neutral-600 dark:text-neutral-400 line-clamp-2 mb-6 h-[42px] leading-relaxed">
