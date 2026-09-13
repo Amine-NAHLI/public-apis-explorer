@@ -1,9 +1,10 @@
 import apisData from '../data/apis.json';
 
-export type ApiEntry = {
+export interface ApiEntry {
   name: string;
   link: string;
   description: string;
+  detailedDescription?: string;
   auth: string;
   https: string;
   cors: string;

@@ -296,6 +296,13 @@ export default function Home() {
               </h3>
               <button onClick={() => setSelectedApi(null)} className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"><X className="w-4 h-4"/></button>
             </div>
+
+            {/* Detailed Description */}
+            <div className="px-6 py-4 bg-white dark:bg-[#0a0a0a]">
+              <p className="text-[14px] text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                {selectedApi.detailedDescription || selectedApi.description}
+              </p>
+            </div>
             
             {/* Language Tabs */}
             <div className="flex border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#050505] px-2 pt-2 gap-1 overflow-x-auto">
