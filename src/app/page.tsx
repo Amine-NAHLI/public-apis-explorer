@@ -199,11 +199,6 @@ export default function Home() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-neutral-900/50 backdrop-blur-sm mb-8">
-            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-            <span className="text-[13px] font-medium text-neutral-600 dark:text-neutral-300">{t.indexed}</span>
-          </div>
-
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-neutral-900 dark:text-white mb-6 leading-tight">
             {t.titleMain} <br className="hidden sm:block"/>
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-neutral-900 to-neutral-500 dark:from-white dark:to-neutral-500">
