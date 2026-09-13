@@ -1,11 +1,56 @@
 'use client';
 
 import { useState, useMemo, useEffect, useRef } from 'react';
-import { Search, ExternalLink, Shield, Check, Globe, Moon, Sun, Heart, Code2, Copy, X, Sparkles, Tag, Key, Lock, ChevronRight, HelpCircle, Dices, ArrowDownAZ, ArrowUpZA, FileText, Play, TerminalSquare, RefreshCw } from 'lucide-react';
+import { Search, ExternalLink, Shield, Check, Globe, Moon, Sun, Heart, Code2, Copy, X, Sparkles, Tag, Key, Lock, ChevronRight, HelpCircle, Dices, ArrowDownAZ, ArrowUpZA, FileText, Play, TerminalSquare, RefreshCw, Download } from 'lucide-react';
 import { getAllApis, getCategories, searchApis, ApiEntry } from '@/lib/api-service';
 import { useTheme } from 'next-themes';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
+
+function HealthBadge({ apiLink, appLanguage }: { apiLink: string; appLanguage: string }) {
+  const [status, setStatus] = useState<'checking' | 'online' | 'offline'>('checking');
+  const badgeRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    let controller: AbortController | null = null;
+    let observer: IntersectionObserver;
+
+    observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && status === 'checking') {
+        controller = new AbortController();
+        fetch(apiLink, { method: 'GET', signal: controller.signal })
+          .then(res => setStatus(res.ok ? 'online' : 'offline'))
+          .catch(() => setStatus('offline'));
+        
+        // Disconnect after first check
+        observer.disconnect();
+      }
+    }, { threshold: 0.1 });
+
+    if (badgeRef.current) observer.observe(badgeRef.current);
+    
+    return () => {
+      observer.disconnect();
+      if (controller) controller.abort();
+    };
+  }, [apiLink, status]);
+
+  if (status === 'checking') {
+    return (
+      <span ref={badgeRef} className="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 text-neutral-500 text-[10px] font-medium rounded flex items-center gap-1.5" title={appLanguage === 'fr' ? 'Vérification du statut...' : 'Checking status...'}>
+        <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 animate-pulse"></span>
+        Check
+      </span>
+    );
+  }
+
+  return (
+    <span className={`px-2 py-1 text-[10px] font-medium rounded flex items-center gap-1.5 ${status === 'online' ? 'bg-green-50 dark:bg-green-500/10 text-green-600 dark:text-green-400' : 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400'}`}>
+      <span className={`w-1.5 h-1.5 rounded-full ${status === 'online' ? 'bg-green-500' : 'bg-red-500'}`}></span>
+      {status === 'online' ? 'Online' : 'Offline'}
+    </span>
+  );
+}
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
@@ -29,6 +74,7 @@ export default function Home() {
   const [snippetLanguage, setSnippetLanguage] = useState<'javascript' | 'python' | 'curl' | 'nodejs' | 'go'>('javascript');
   const [testResult, setTestResult] = useState<string>('');
   const [isTesting, setIsTesting] = useState(false);
+  const [showExportMenu, setShowExportMenu] = useState(false);
   const loadMoreRef = useRef<HTMLDivElement>(null);
   
   const t = {
@@ -189,6 +235,42 @@ export default function Home() {
     }
   };
 
+  const exportFavorites = (format: 'json' | 'md') => {
+    const favoriteApis = getAllApis().filter(api => bookmarks.has(api.name));
+    if (favoriteApis.length === 0) return;
+
+    let content = '';
+    let filename = '';
+    let mimeType = '';
+
+    if (format === 'json') {
+      content = JSON.stringify(favoriteApis, null, 2);
+      filename = 'favorites.json';
+      mimeType = 'application/json';
+    } else {
+      content = `# My Favorite APIs\n\n`;
+      favoriteApis.forEach(api => {
+        content += `### [${api.name}](${api.link})\n`;
+        content += `- **Description**: ${api.description}\n`;
+        content += `- **Category**: ${api.category}\n`;
+        content += `- **Auth**: ${api.auth}\n\n`;
+      });
+      filename = 'favorites.md';
+      mimeType = 'text/markdown';
+    }
+
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    setShowExportMenu(false);
+  };
+
   if (!mounted) return null;
 
   return (
@@ -216,11 +298,45 @@ export default function Home() {
           </div>
           
           <nav className="hidden lg:flex items-center gap-6">
-            <button onClick={resetFilters} className={`text-[14px] font-medium transition-colors ${!showBookmarksOnly ? 'text-neutral-900 dark:text-neutral-100' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300'}`}>{t.directory}</button>
-            <button onClick={() => setShowBookmarksOnly(!showBookmarksOnly)} className={`text-[14px] font-medium transition-colors flex items-center gap-1.5 ${showBookmarksOnly ? 'text-neutral-900 dark:text-white' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-300'}`}>
-              <Heart className={`w-4 h-4 ${showBookmarksOnly ? 'fill-current' : ''}`} /> 
-              {t.favorites} {bookmarks.size > 0 && <span className="ml-1 px-1.5 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-[11px] font-mono">{bookmarks.size}</span>}
-            </button>
+            <div className="flex gap-6 items-center">
+              <button 
+                onClick={() => { setShowBookmarksOnly(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className={`text-[13px] font-medium transition-colors ${!showBookmarksOnly ? 'text-neutral-900 dark:text-white' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white'}`}
+              >
+                {t.directory}
+              </button>
+              <button 
+                onClick={() => { setShowBookmarksOnly(true); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className={`flex items-center gap-1.5 text-[13px] font-medium transition-colors ${showBookmarksOnly ? 'text-neutral-900 dark:text-white' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white'}`}
+              >
+                <Heart className={`w-3.5 h-3.5 ${showBookmarksOnly ? 'fill-current text-red-500' : ''}`} /> {t.favorites}
+              </button>
+              
+              {/* Export Menu */}
+              {bookmarks.size > 0 && (
+                <div className="relative">
+                  <button 
+                    onClick={() => setShowExportMenu(!showExportMenu)}
+                    className="flex items-center gap-1.5 text-[13px] font-medium text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
+                  >
+                    <Download className="w-3.5 h-3.5" /> Export
+                  </button>
+                  <AnimatePresence>
+                    {showExportMenu && (
+                      <motion.div 
+                        initial={{ opacity: 0, y: -5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -5 }}
+                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 py-1 w-32 bg-white dark:bg-[#111] border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-xl z-50 flex flex-col"
+                      >
+                        <button onClick={() => exportFavorites('json')} className="px-4 py-2 text-[12px] text-left text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-[#1a1a1a] hover:text-neutral-900 dark:hover:text-white transition-colors">Format JSON</button>
+                        <button onClick={() => exportFavorites('md')} className="px-4 py-2 text-[12px] text-left text-neutral-600 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-[#1a1a1a] hover:text-neutral-900 dark:hover:text-white transition-colors">Format Markdown</button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )}
+            </div>
           </nav>
 
           <div className="flex items-center gap-3">
@@ -360,6 +476,19 @@ export default function Home() {
                   <button onClick={() => toggleBookmark(api.name)} className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
                     <Heart className={`w-4 h-4 ${isBookmarked ? 'fill-current text-neutral-900 dark:text-white' : ''}`} />
                   </button>
+                </div>
+
+                {/* Tags */}
+                <div className="flex gap-2 mb-4">
+                  {api.auth && api.auth.toLowerCase() === 'no' ? (
+                    <span className="px-2 py-1 bg-green-50 dark:bg-green-500/10 text-green-600 dark:text-green-400 text-[10px] font-medium rounded">Free</span>
+                  ) : (
+                    <span className="px-2 py-1 bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-medium rounded flex items-center gap-1"><Key className="w-3 h-3"/> Auth</span>
+                  )}
+                  <span className="px-2 py-1 bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 text-[10px] font-medium rounded">
+                    {api.https.toLowerCase() === 'yes' ? 'HTTPS' : 'HTTP'}
+                  </span>
+                  {api.cors.toLowerCase() === 'yes' && <HealthBadge apiLink={api.link} appLanguage={appLanguage} />}
                 </div>
 
                 <p className="text-[14px] text-neutral-600 dark:text-neutral-400 line-clamp-2 mb-6 h-[42px] leading-relaxed">
