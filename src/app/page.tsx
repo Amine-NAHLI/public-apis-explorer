@@ -567,32 +567,32 @@ export default function Home() {
 
       {/* Help Modal */}
       {showHelpModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-white/50 dark:bg-black/50 backdrop-blur-sm" onClick={() => setShowHelpModal(false)}>
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-white/50 dark:bg-black/50 backdrop-blur-sm" onClick={() => setShowHelpModal(false)}>
           <div className="bg-white dark:bg-[#0a0a0a] rounded-xl max-w-xl w-full p-8 shadow-2xl border border-neutral-200 dark:border-neutral-800" onClick={e => e.stopPropagation()}>
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-[16px] font-semibold text-neutral-900 dark:text-white">Filter Documentation</h3>
+              <h3 className="text-[16px] font-semibold text-neutral-900 dark:text-white">{appLanguage === 'fr' ? 'Documentation des Filtres' : 'Filter Documentation'}</h3>
               <button onClick={() => setShowHelpModal(false)} className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"><X className="w-4 h-4"/></button>
             </div>
             
             <div className="space-y-6 text-[14px] text-neutral-600 dark:text-neutral-400">
               <div>
-                <h4 className="font-medium text-neutral-900 dark:text-neutral-200 mb-1 flex items-center gap-2"><Search className="w-4 h-4"/> Search Bar</h4>
-                <p>Scans through API names and descriptions for precise keyword matching.</p>
+                <h4 className="font-medium text-neutral-900 dark:text-neutral-200 mb-1 flex items-center gap-2"><Search className="w-4 h-4"/> {appLanguage === 'fr' ? 'Barre de Recherche' : 'Search Bar'}</h4>
+                <p>{appLanguage === 'fr' ? 'Analyse les noms et descriptions des APIs pour une correspondance précise des mots-clés.' : 'Scans through API names and descriptions for precise keyword matching.'}</p>
               </div>
               <div className="h-px bg-neutral-200 dark:bg-neutral-800"></div>
               <div>
-                <h4 className="font-medium text-neutral-900 dark:text-neutral-200 mb-1 flex items-center gap-2"><Key className="w-4 h-4"/> Authentication</h4>
-                <p>Filter by APIs that require API keys/OAuth versus fully free and open APIs.</p>
+                <h4 className="font-medium text-neutral-900 dark:text-neutral-200 mb-1 flex items-center gap-2"><Key className="w-4 h-4"/> {appLanguage === 'fr' ? 'Authentification' : 'Authentication'}</h4>
+                <p>{appLanguage === 'fr' ? 'Filtrez par APIs nécessitant une clé d\'API/OAuth par rapport aux APIs entièrement libres.' : 'Filter by APIs that require API keys/OAuth versus fully free and open APIs.'}</p>
               </div>
               <div className="h-px bg-neutral-200 dark:bg-neutral-800"></div>
               <div>
                 <h4 className="font-medium text-neutral-900 dark:text-neutral-200 mb-1 flex items-center gap-2"><Lock className="w-4 h-4"/> HTTPS</h4>
-                <p>Filter APIs that support secure encrypted connections (recommended for production).</p>
+                <p>{appLanguage === 'fr' ? 'Filtrez les APIs prenant en charge les connexions chiffrées sécurisées (recommandé pour la production).' : 'Filter APIs that support secure encrypted connections (recommended for production).'}</p>
               </div>
               <div className="h-px bg-neutral-200 dark:bg-neutral-800"></div>
               <div>
                 <h4 className="font-medium text-neutral-900 dark:text-neutral-200 mb-1 flex items-center gap-2"><Globe className="w-4 h-4"/> CORS</h4>
-                <p>Cross-Origin Resource Sharing. Important if you intend to fetch the API directly from a browser frontend.</p>
+                <p>{appLanguage === 'fr' ? 'Partage des ressources entre origines multiples. Important si vous avez l\'intention d\'appeler l\'API directement depuis un navigateur (frontend).' : 'Cross-Origin Resource Sharing. Important if you intend to fetch the API directly from a browser frontend.'}</p>
               </div>
             </div>
           </div>
