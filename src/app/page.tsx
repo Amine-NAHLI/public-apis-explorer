@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
-import { Search, ExternalLink, Shield, Check, Globe, Moon, Sun, Heart, Code2, Copy, X, Sparkles, Tag, Key, Lock, ChevronRight, HelpCircle, Dices, ArrowDownAZ, ArrowUpZA, FileText } from 'lucide-react';
+import { useState, useMemo, useEffect, useRef } from 'react';
+import { Search, ExternalLink, Shield, Check, Globe, Moon, Sun, Heart, Code2, Copy, X, Sparkles, Tag, Key, Lock, ChevronRight, HelpCircle, Dices, ArrowDownAZ, ArrowUpZA, FileText, Play, TerminalSquare, RefreshCw } from 'lucide-react';
 import { getAllApis, getCategories, searchApis, ApiEntry } from '@/lib/api-service';
 import { useTheme } from 'next-themes';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -22,10 +22,14 @@ export default function Home() {
   const [bookmarks, setBookmarks] = useState<Set<string>>(new Set());
   const [showBookmarksOnly, setShowBookmarksOnly] = useState(false);
   const [selectedApi, setSelectedApi] = useState<ApiEntry | null>(null);
-  const [modalMode, setModalMode] = useState<'details' | 'snippet'>('details');
+  const [modalMode, setModalMode] = useState<'details' | 'snippet' | 'test'>('details');
   const [showHelpModal, setShowHelpModal] = useState(false);
-  const [page, setPage] = useState(1);
+  
+  const [visibleCount, setVisibleCount] = useState(24);
   const [snippetLanguage, setSnippetLanguage] = useState<'javascript' | 'python' | 'curl' | 'nodejs' | 'go'>('javascript');
+  const [testResult, setTestResult] = useState<string>('');
+  const [isTesting, setIsTesting] = useState(false);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
   
   const t = {
     directory: appLanguage === 'fr' ? 'Annuaire' : 'Directory',
@@ -62,7 +66,27 @@ export default function Home() {
     setMounted(true);
     const saved = localStorage.getItem('api-bookmarks');
     if (saved) setBookmarks(new Set(JSON.parse(saved)));
+
+    // Deep linking: read from URL on mount
+    const params = new URLSearchParams(window.location.search);
+    const apiName = params.get('api');
+    if (apiName) {
+      const all = getAllApis();
+      const found = all.find(a => a.name === apiName);
+      if (found) setSelectedApi(found);
+    }
   }, []);
+
+  // Deep linking: update URL on modal open/close
+  useEffect(() => {
+    if (mounted) {
+      if (selectedApi) {
+        window.history.pushState(null, '', `?api=${encodeURIComponent(selectedApi.name)}`);
+      } else {
+        window.history.pushState(null, '', window.location.pathname);
+      }
+    }
+  }, [selectedApi, mounted]);
 
   const toggleBookmark = (apiName: string) => {
     const newBookmarks = new Set(bookmarks);
@@ -87,16 +111,19 @@ export default function Home() {
   }, [query, category, auth, cors, https, showBookmarksOnly, bookmarks, sortOrder]);
 
   const paginatedApis = useMemo(() => {
-    const start = (page - 1) * itemsPerPage;
-    return filteredApis.slice(start, start + itemsPerPage);
-  }, [filteredApis, page]);
+    return filteredApis.slice(0, visibleCount);
+  }, [filteredApis, visibleCount]);
 
-  const totalPages = Math.ceil(filteredApis.length / itemsPerPage);
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && visibleCount < filteredApis.length) {
+        setVisibleCount(prev => prev + 24);
+      }
+    }, { threshold: 0.1 });
 
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+    if (loadMoreRef.current) observer.observe(loadMoreRef.current);
+    return () => observer.disconnect();
+  }, [visibleCount, filteredApis.length]);
 
   const resetFilters = () => {
     setQuery('');
@@ -106,10 +133,11 @@ export default function Home() {
     setHttps('All');
     setSortOrder('none');
     setShowBookmarksOnly(false);
-    handlePageChange(1);
+    setVisibleCount(24);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  useEffect(() => setPage(1), [query, category, auth, cors, https, sortOrder, showBookmarksOnly]);
+  useEffect(() => setVisibleCount(24), [query, category, auth, cors, https, sortOrder, showBookmarksOnly]);
 
   const handleRandomApi = () => {
     if (filteredApis.length === 0) return;
@@ -137,6 +165,28 @@ export default function Home() {
     const snippet = generateSnippet(api, snippetLanguage);
     navigator.clipboard.writeText(snippet);
     alert('Snippet copied to clipboard!');
+  };
+
+  const handleTestApi = async () => {
+    if (!selectedApi) return;
+    setIsTesting(true);
+    setTestResult(appLanguage === 'fr' ? 'Envoi de la requête...' : 'Sending request...');
+    try {
+      const response = await fetch(selectedApi.link);
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const contentType = response.headers.get("content-type");
+      let data;
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        data = await response.json();
+      } else {
+        data = await response.text();
+      }
+      setTestResult(typeof data === 'object' ? JSON.stringify(data, null, 2) : data);
+    } catch (err: any) {
+      setTestResult(`Error: ${err.message}\n\n${appLanguage === 'fr' ? 'Cela peut être dû à une restriction CORS du navigateur ou au fait que l\'API est hors ligne.' : 'This might be due to browser CORS restrictions or the API being offline.'}`);
+    } finally {
+      setIsTesting(false);
+    }
   };
 
   if (!mounted) return null;
@@ -350,18 +400,13 @@ export default function Home() {
           </AnimatePresence>
         </motion.div>
         
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-4 mt-8">
-            <button onClick={() => handlePageChange(Math.max(1, page - 1))} disabled={page === 1} className="p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-500 hover:text-neutral-900 dark:hover:text-white disabled:opacity-30 transition-colors">
-              <ChevronRight className="w-5 h-5 rotate-180" />
-            </button>
-            <span className="text-[14px] font-medium text-neutral-500">
-              {page} <span className="text-neutral-300 dark:text-neutral-700">/</span> {totalPages}
-            </span>
-            <button onClick={() => handlePageChange(Math.min(totalPages, page + 1))} disabled={page === totalPages} className="p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-500 hover:text-neutral-900 dark:hover:text-white disabled:opacity-30 transition-colors">
-              <ChevronRight className="w-5 h-5" />
-            </button>
+        {/* Infinite Scroll Trigger */}
+        {visibleCount < filteredApis.length && (
+          <div ref={loadMoreRef} className="flex justify-center items-center h-24 mb-12">
+            <div className="flex items-center gap-2 text-neutral-500">
+              <RefreshCw className="w-5 h-5 animate-spin" />
+              <span className="text-[14px] font-medium">{appLanguage === 'fr' ? 'Chargement...' : 'Loading more...'}</span>
+            </div>
           </div>
         )}
       </main>
@@ -384,23 +429,28 @@ export default function Home() {
               onClick={e => e.stopPropagation()}
             >
               <div className="px-6 py-4 border-b border-neutral-200 dark:border-neutral-800 flex justify-between items-center bg-[#FAFAFA] dark:bg-[#0a0a0a]">
-                <div className="flex items-center gap-4">
-                  <h3 className="text-[16px] font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
+                <div className="flex items-center gap-4 overflow-x-auto no-scrollbar">
+                  <h3 className="text-[16px] font-semibold text-neutral-900 dark:text-white flex items-center gap-2 whitespace-nowrap">
                     {selectedApi.name}
                   </h3>
-                  <div className="h-4 w-px bg-neutral-300 dark:bg-neutral-700"></div>
-                  <div className="flex bg-neutral-100 dark:bg-neutral-900 p-1 rounded-lg">
+                  <div className="h-4 w-px bg-neutral-300 dark:bg-neutral-700 shrink-0"></div>
+                  <div className="flex bg-neutral-100 dark:bg-neutral-900 p-1 rounded-lg shrink-0">
                     <button onClick={() => setModalMode('details')} className={`px-3 py-1 text-[12px] font-medium rounded-md transition-colors ${modalMode === 'details' ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white'}`}>{t.details}</button>
                     <button onClick={() => setModalMode('snippet')} className={`px-3 py-1 text-[12px] font-medium rounded-md transition-colors ${modalMode === 'snippet' ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white'}`}>{t.snippet}</button>
+                    {selectedApi.cors.toLowerCase() === 'yes' && (
+                      <button onClick={() => setModalMode('test')} className={`px-3 py-1 text-[12px] font-medium rounded-md transition-colors ${modalMode === 'test' ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-sm' : 'text-neutral-500 hover:text-neutral-900 dark:hover:text-white'} flex items-center gap-1`}>
+                        <Play className="w-3 h-3" /> {appLanguage === 'fr' ? 'Test Live' : 'Live Test'}
+                      </button>
+                    )}
                   </div>
                 </div>
-                <button onClick={() => setSelectedApi(null)} className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"><X className="w-4 h-4"/></button>
+                <button onClick={() => setSelectedApi(null)} className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors shrink-0 ml-4"><X className="w-4 h-4"/></button>
               </div>
 
               {/* Detailed Description */}
               {modalMode === 'details' && (
-                <div className="px-6 py-6 bg-white dark:bg-[#0a0a0a] min-h-[250px]">
-                  <div className="text-[14px] text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-none">
+                <div className="px-6 py-6 bg-white dark:bg-[#0a0a0a] max-h-[70vh] overflow-y-auto">
+                  <div className="text-[14px] text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-none mb-8">
                     <ReactMarkdown
                       components={{
                         ul: ({node, ...props}) => <ul className="list-disc pl-5 space-y-2 mb-4" {...props} />,
@@ -414,6 +464,30 @@ export default function Home() {
                         ? (selectedApi as any).detailedDescription_fr 
                         : (selectedApi.detailedDescription || selectedApi.description)}
                     </ReactMarkdown>
+                  </div>
+                  
+                  {/* Similar APIs Section */}
+                  <div>
+                    <h4 className="text-[14px] font-semibold text-neutral-900 dark:text-white mb-3">
+                      {appLanguage === 'fr' ? 'APIs similaires' : 'Similar APIs'}
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      {getAllApis()
+                        .filter(a => a.category === selectedApi.category && a.name !== selectedApi.name)
+                        .slice(0, 3)
+                        .map(similarApi => (
+                          <div 
+                            key={similarApi.name} 
+                            onClick={() => setSelectedApi(similarApi)}
+                            className="p-3 border border-neutral-200 dark:border-neutral-800 rounded-lg hover:border-neutral-400 dark:hover:border-neutral-600 cursor-pointer transition-colors bg-[#FAFAFA] dark:bg-[#111]"
+                          >
+                            <div className="text-[13px] font-semibold text-neutral-900 dark:text-white mb-1">{similarApi.name}</div>
+                            <div className="text-[11px] text-neutral-500 line-clamp-2">
+                              {appLanguage === 'fr' && (similarApi as any).description_fr ? (similarApi as any).description_fr : similarApi.description}
+                            </div>
+                          </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
@@ -436,7 +510,7 @@ export default function Home() {
                     ))}
                   </div>
 
-                  <div className="p-6 bg-white dark:bg-[#050505] min-h-[250px]">
+                  <div className="p-6 bg-white dark:bg-[#050505] max-h-[70vh] overflow-y-auto">
                     <div className="relative group">
                       <pre className="bg-[#111] text-neutral-300 p-5 rounded-lg text-[13px] font-mono overflow-x-auto border border-neutral-800">
                         <code>{generateSnippet(selectedApi, snippetLanguage)}</code>
@@ -448,9 +522,47 @@ export default function Home() {
                   </div>
                 </div>
               )}
+
+              {/* Live Test Playground */}
+              {modalMode === 'test' && (
+                <div className="p-6 bg-[#FAFAFA] dark:bg-[#050505] max-h-[70vh] overflow-y-auto flex flex-col gap-4">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div className="text-[13px] text-neutral-500">
+                      GET <span className="font-mono text-neutral-900 dark:text-neutral-300 px-2 py-1 bg-white dark:bg-[#111] border border-neutral-200 dark:border-neutral-800 rounded-md select-all">{selectedApi.link}</span>
+                    </div>
+                    <button 
+                      onClick={handleTestApi}
+                      disabled={isTesting}
+                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-medium rounded-lg transition-colors flex items-center gap-2 disabled:opacity-50 shrink-0"
+                    >
+                      {isTesting ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4" />}
+                      {appLanguage === 'fr' ? 'Exécuter' : 'Run Request'}
+                    </button>
+                  </div>
+                  
+                  <div className="relative flex-1 min-h-[200px]">
+                    <div className="absolute inset-0 bg-[#111] rounded-lg border border-neutral-800 overflow-hidden flex flex-col">
+                      <div className="flex items-center px-4 py-2 bg-[#1a1a1a] border-b border-neutral-800 text-[12px] font-medium text-neutral-400 gap-2">
+                        <TerminalSquare className="w-4 h-4" /> Response Output
+                      </div>
+                      <div className="p-4 overflow-auto flex-1">
+                        {testResult ? (
+                          <pre className="text-[13px] font-mono text-green-400 whitespace-pre-wrap break-all">
+                            {testResult}
+                          </pre>
+                        ) : (
+                          <div className="text-[13px] text-neutral-600 font-mono italic">
+                            {appLanguage === 'fr' ? '// Cliquez sur "Exécuter" pour voir le résultat...' : '// Click "Run Request" to see the output...'}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
+        )}
       </AnimatePresence>
 
       {/* Help Modal */}
