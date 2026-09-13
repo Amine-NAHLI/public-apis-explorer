@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Public APIs Explorer
 
-## Getting Started
+**Live Demo:** [https://public-apis-explorer-xi.vercel.app/](https://public-apis-explorer-xi.vercel.app/)
 
-First, run the development server:
+The definitive directory to find, explore, and integrate the best public APIs into your next project. We've indexed and verified over 1,742 public APIs across dozens of categories with zero friction, instant search, and unified specifications.
+
+## 🚀 Features
+
+- **1,742+ Indexed APIs**: A massive collection of verified public APIs.
+- **Bilingual Support (EN/FR)**: Fully localized interface and AI-translated API descriptions.
+- **Instant Search & Filtering**: Lightning-fast search with filtering by Category, Auth type, HTTPS, and CORS support.
+- **Integration Snippets**: Ready-to-use code snippets (cURL, JavaScript, Python, Node.js, Go) for every API.
+- **Favorites System**: Bookmark your favorite APIs locally.
+- **Dark Mode Support**: Beautiful UI adapting to your system preferences.
+- **Fully Responsive**: Designed to work perfectly on desktop, tablet, and mobile.
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Data Enrichment**: Built-in scripts using `gpt-4o-mini` to automatically clean, detail, and translate API entries.
+- **Deployment**: [Vercel](https://vercel.com/) with Web Analytics
+
+## 📦 Getting Started
+
+First, clone the repository and install the dependencies:
+
+```bash
+git clone https://github.com/Amine-NAHLI/public-apis-explorer.git
+cd public-apis-explorer/web
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🤖 Data Enrichment Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project includes Node.js scripts to fetch, clean, and enrich API data using OpenAI's GPT models.
 
-## Learn More
+1. **Extract APIs**: Fetches the latest APIs from external sources.
+   ```bash
+   node scripts/extract-apis.js
+   ```
+2. **Enrich Descriptions**: Uses AI to generate structured, professional descriptions for each API.
+   ```bash
+   node scripts/enrich-apis.mjs
+   ```
+3. **Translate APIs**: Uses AI to translate all API descriptions into French for bilingual support.
+   ```bash
+   node scripts/translate-apis.mjs
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+## 🤝 Contributing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Missing an API? Want to improve the platform? Contributions are welcome!
+Feel free to open an issue or contact the developer.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Developer**: Amine NAHLI
+- **LinkedIn**: [Amine NAHLI](https://www.linkedin.com/in/amine-nahli-48b2a734b/)
+- **Email**: nahli-ami@upf.ac.ma
 
-## Deploy on Vercel
+## 📄 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is open-source and free to use.
