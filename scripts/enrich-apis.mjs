@@ -11,15 +11,7 @@ const AI_ENDPOINT = process.env.AI_ENDPOINT || 'http://127.0.0.1:8080/v1/chat/co
 const MODEL_NAME = process.env.MODEL_NAME || 'gemma3';
 
 const BATCH_SIZE_TOTAL = 20; // Nombre d'APIs traitées par "tour"
-const CONCURRENT_REQUESTS = 4; // Nombre de slots dans llama.cpp
-const PAUSE_EVERY = 100;
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-
-const askQuestion = (query) => new Promise((resolve) => rl.question(query, resolve));
+const CONCURRENT_REQUESTS = 2; // On réduit à 2 pour soulager le serveur local
 
 // Read existing data
 let apis = [];
@@ -73,6 +65,13 @@ IMPORTANT INSTRUCTIONS:
     const data = await response.json();
     let content = data.choices[0].message.content.trim();
     
+    // Nettoyage ultra-robuste : on extrait uniquement ce qui ressemble à du JSON
+    const firstBrace = content.indexOf('{');
+    const lastBrace = content.lastIndexOf('}');
+    if (firstBrace !== -1 && lastBrace !== -1) {
+      content = content.substring(firstBrace, lastBrace + 1);
+    }
+
     const parsedResponse = JSON.parse(content);
     return parsedResponse.apis || [];
   } catch (err) {
@@ -96,11 +95,10 @@ async function run() {
   let sessionProcessedCount = 0;
 
   for (let i = 0; i < pendingApis.length; i += BATCH_SIZE_TOTAL) {
-    // PAUSE TOUS LES 100
-    if (sessionProcessedCount > 0 && sessionProcessedCount % PAUSE_EVERY === 0) {
+    // Sauvegarde régulière tous les 100 sans faire de pause
+    if (sessionProcessedCount > 0 && sessionProcessedCount % 100 === 0) {
       fs.writeFileSync(jsonPath, JSON.stringify(apis, null, 2));
-      console.log(`\n💾 Sauvegarde effectuée ! Progression : ${apis.length - pendingApis.length + sessionProcessedCount} / ${apis.length}`);
-      await askQuestion(`\n🛑 PAUSE (${sessionProcessedCount} APIs traitées durant cette session). Appuie sur ENTRÉE pour continuer...`);
+      console.log(`\n💾 Sauvegarde automatique effectuée ! Progression : ${apis.length - pendingApis.length + sessionProcessedCount} / ${apis.length}`);
     }
 
     const batch = pendingApis.slice(i, i + BATCH_SIZE_TOTAL);
