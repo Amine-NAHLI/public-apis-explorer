@@ -7,11 +7,18 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const jsonPath = path.resolve(__dirname, '../src/data/apis.json');
-const AI_ENDPOINT = process.env.AI_ENDPOINT || 'http://127.0.0.1:8080/v1/chat/completions';
-const MODEL_NAME = process.env.MODEL_NAME || 'gemma3';
+// URL pour NVIDIA NIM
+const AI_ENDPOINT = 'https://integrate.api.nvidia.com/v1/chat/completions';
+const MODEL_NAME = process.env.MODEL_NAME || 'meta/llama-3.2-90b-vision-instruct';
+const API_KEY = process.env.NVIDIA_API_KEY;
 
-const BATCH_SIZE_TOTAL = 20; // Nombre d'APIs traitées par "tour"
-const CONCURRENT_REQUESTS = 2; // On réduit à 2 pour soulager le serveur local
+if (!API_KEY) {
+  console.error("❌ Erreur : La variable d'environnement NVIDIA_API_KEY est manquante.");
+  process.exit(1);
+}
+
+const BATCH_SIZE_TOTAL = 20; 
+const CONCURRENT_REQUESTS = 4; // L'API NVIDIA est très rapide, on peut lancer 4 requêtes simultanées sans problème
 
 // Read existing data
 let apis = [];
@@ -51,7 +58,10 @@ IMPORTANT INSTRUCTIONS:
   try {
     const response = await fetch(AI_ENDPOINT, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${API_KEY}`
+      },
       body: JSON.stringify({
         model: MODEL_NAME,
         messages: [{ role: 'user', content: prompt }],
