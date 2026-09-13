@@ -36,16 +36,6 @@
     "detailedDescription_fr": "- **But :** Fournit des faits aléatoires sur les chats aux utilisateurs.\n- **Contenu :** Une gamme diversifiée d'anecdotes sur les chats, disponible à la demande.\n- **Engagement :** Parfait pour des sessions d'apprentissage rapides et amusantes sur les chats.\n- **Flexibilité :** Les utilisateurs peuvent accéder aux faits à tout moment pour un plaisir spontané."
   },
   {
-    "name": "Cat Facts",
-    "link": "https://catfact.ninja/",
-    "description": "Random cat facts",
-    "auth": "No",
-    "https": "Yes",
-    "cors": "Yes",
-    "category": "Animals",
-    "detailedDescription": "- **Purpose:** Provides random cat facts for users.\n- **Content:** A diverse range of trivia about cats, available on demand.\n- **Engagement:** Perfect for quick, fun learning sessions about cats.\n- **Flexibility:** Users can access facts at any time for spontaneous enjoyment."
-  },
-  {
     "name": "Cataas",
     "link": "https://cataas.com/",
     "description": "Cat as a service (cats pictures and gifs)",
@@ -80,16 +70,6 @@
     "detailedDescription": "- **Purpose:** Delivers random facts about dogs to users.\n- **Usage:** Suitable for educational apps or trivia games focused on canine knowledge.\n- **Content Variety:** Offers a diverse range of interesting and fun facts.",
     "description_fr": "Faits aléatoires sur les chiens",
     "detailedDescription_fr": "- **But :** Fournit des faits aléatoires spécifiquement sur les chiens.\n- **Utilisation :** Peut être intégré dans des applications qui promeuvent le soin ou la sensibilisation aux chiens.\n- **Variété de contenu :** Présente un large éventail de faits pour engager les utilisateurs."
-  },
-  {
-    "name": "Dog Facts",
-    "link": "https://kinduff.github.io/dog-api/",
-    "description": "Random facts of Dogs",
-    "auth": "No",
-    "https": "Yes",
-    "cors": "Yes",
-    "category": "Animals",
-    "detailedDescription": "- **Purpose:** Supplies random facts specifically about dogs.\n- **Usage:** Can be integrated into apps that promote dog care or awareness.\n- **Content Variety:** Features a wide array of facts to engage users."
   },
   {
     "name": "Dogs",
@@ -1316,16 +1296,6 @@
     "detailedDescription_fr": "- **But :** Fournit l'accès au texte de la Bhagavad Gita.\n- **Contenu :** Comprend des versets et des chapitres de l'écrit sacré hindou.\n- **Utilisation :** Idéal pour les études spirituelles, la recherche et les fins éducatives."
   },
   {
-    "name": "Bhagavad Gita",
-    "link": "https://bhagavadgita.io/api",
-    "description": "Bhagavad Gita text",
-    "auth": "OAuth",
-    "https": "Yes",
-    "cors": "Yes",
-    "category": "Books",
-    "detailedDescription": "- **Purpose:** Provides access to the text of the Bhagavad Gita.\n- **Content:** Includes verses and chapters from the sacred Hindu scripture.\n- **Usage:** Ideal for spiritual studies, research, and educational purposes."
-  },
-  {
     "name": "Bhagavad Gita telugu",
     "link": "https://gita-api.vercel.app",
     "description": "Bhagavad Gita API in telugu and odia languages",
@@ -2092,16 +2062,6 @@
     "detailedDescription": "- **Purpose:** Provides a database of ICS files for non-working days.\n- **Data Format:** Offers data in standard ICS format for calendar applications.\n- **Comprehensive Coverage:** Includes various non-working days across different regions.\n- **Use Cases:** Ideal for businesses needing to manage schedules and resources.",
     "description_fr": "API REST simple pour vérifier les jours ouvrables, non ouvrables ou courts pour la Russie, la CEI, les États-Unis et d'autres",
     "detailedDescription_fr": "- **But :** Fournit des informations sur les jours ouvrables, non ouvrables et courts.\n- **Couverture :** Inclut des données pour la Russie, la CEI, les États-Unis et d'autres régions.\n- **Utilisation :** Idéal pour les entreprises et les applications ayant besoin de gérer les horaires et les opérations."
-  },
-  {
-    "name": "Non-Working Days",
-    "link": "https://isdayoff.ru",
-    "description": "Simple REST API for checking working, non-working or short days for Russia, CIS, USA and other",
-    "auth": "No",
-    "https": "Yes",
-    "cors": "Yes",
-    "category": "Calendar",
-    "detailedDescription": "- **Purpose:** Provides information on working, non-working, and short days.\n- **Coverage:** Includes data for Russia, CIS, USA, and other regions.\n- **Usage:** Ideal for businesses and applications needing to manage schedules and operations."
   },
   {
     "name": "Public Holidays",
@@ -5056,16 +5016,6 @@
     "detailedDescription_fr": "- **But :** Générer et décoder des graphiques de code QR.\n- **Fonctionnalité :** Prend en charge à la fois la création et la lecture de codes QR.\n- **Applications :** Utile pour le partage de données et la récupération d'informations."
   },
   {
-    "name": "QR code",
-    "link": "http://goqr.me/api/",
-    "description": "Generate and decode / read QR code graphics",
-    "auth": "No",
-    "https": "Yes",
-    "cors": "Unknown",
-    "category": "Development",
-    "detailedDescription": "- **Purpose:** Generate and decode QR code graphics.\n- **Functionality:** Supports both creation and reading of QR codes.\n- **Applications:** Useful for data sharing and information retrieval."
-  },
-  {
     "name": "QR Code Crafter",
     "link": "https://qrcodecrafter.com/qr-code-api",
     "description": "Generate static QR codes in SVG, PNG, JPG, WebP, PDF, or EPS",
@@ -7190,16 +7140,6 @@
     "detailedDescription_fr": "- **But :** Filtre les actions et les ETF pour la conformité à la charia selon cinq méthodologies.\n- **Fonctionnalités :** Inclut des outils pour le calcul du zakat et la purification des investissements.\n- **Public cible :** Conçu pour les investisseurs musulmans recherchant des options d'investissement éthiques.\n- **Intégration :** Peut être intégré dans des plateformes financières pour améliorer la prise de décision en matière d'investissement."
   },
   {
-    "name": "Helium",
-    "link": "https://heliumtrades.com/mcp-page/",
-    "description": "News with media bias scoring, balanced news synthesis, live market data, AI options pricing",
-    "auth": "No",
-    "https": "Yes",
-    "cors": "Yes",
-    "category": "Finance",
-    "detailedDescription": "- **Purpose:** Provides news with media bias scoring and balanced synthesis.\n- **Features:** Offers live market data and AI-driven options pricing.\n- **Use Cases:** Ideal for investors seeking informed decision-making tools.\n- **Integration:** Easily integrates with financial applications for real-time insights."
-  },
-  {
     "name": "Hotstoks",
     "link": "https://hotstoks.com?utm_source=public-apis",
     "description": "Stock market data powered by SQL",
@@ -8532,16 +8472,6 @@
     "detailedDescription_fr": "- **But :** API de base de données de jeux vidéo complète.\n- **Catégorie :** Jeux & Bandes dessinées, offrant des données de jeu étendues.\n- **Fonctionnalités :** Prend en charge la recherche de jeux, les détails et les évaluations des utilisateurs pour les développeurs et les passionnés."
   },
   {
-    "name": "JokeAPI",
-    "link": "https://sv443.net/jokeapi/v2/",
-    "description": "Programming, Miscellaneous and Dark Jokes",
-    "auth": "No",
-    "https": "Yes",
-    "cors": "Yes",
-    "category": "Games & Comics",
-    "detailedDescription": "- **Purpose:** Provides a variety of programming, miscellaneous, and dark jokes.\n- **Category:** Games & Comics, enhancing applications with humor.\n- **Features:** Customizable joke retrieval based on type and format."
-  },
-  {
     "name": "Jokes One",
     "link": "https://jokes.one/api/joke/",
     "description": "Joke of the day and large category of jokes accessible via REST API",
@@ -8960,16 +8890,6 @@
     "detailedDescription": "- **Purpose:** Provides access to Steam's extensive gaming platform data.\n- **Features:** Includes user profiles, game achievements, and friend lists.\n- **Documentation:** Comprehensive guides for developers to utilize Steam services.",
     "description_fr": "Documentation interne de l'API Web Steam",
     "detailedDescription_fr": "- **But :** Documentation interne pour les fonctionnalités de l'API Web Steam.\n- **Fonctionnalités :** Spécifications techniques détaillées pour un usage interne.\n- **Accès :** Restreint aux développeurs et partenaires autorisés."
-  },
-  {
-    "name": "Steam",
-    "link": "https://github.com/Revadike/InternalSteamWebAPI/wiki",
-    "description": "Internal Steam Web API documentation",
-    "auth": "No",
-    "https": "Yes",
-    "cors": "No",
-    "category": "Games & Comics",
-    "detailedDescription": "- **Purpose:** Internal documentation for Steam Web API functionalities.\n- **Features:** Detailed technical specifications for internal use.\n- **Access:** Restricted to authorized developers and partners."
   },
   {
     "name": "SteamGPT",
@@ -11080,16 +11000,6 @@
     "detailedDescription_fr": "- **But :** Fournit un accès aux données ouvertes du gouvernement mexicain.\n- **Types de données :** Comprend des ensembles de données liés à la démographie, à l'économie et aux services publics.\n- **Utilisation :** Vise à promouvoir la transparence et l'engagement des citoyens dans la gouvernance."
   },
   {
-    "name": "Open Government, Mexico",
-    "link": "https://datos.gob.mx/",
-    "description": "Mexico Government Open Data",
-    "auth": "No",
-    "https": "Yes",
-    "cors": "Unknown",
-    "category": "Government",
-    "detailedDescription": "- **Purpose:** Provides access to open data from the Mexican government.\n- **Data Types:** Includes datasets related to demographics, economics, and public services.\n- **Usage:** Aimed at promoting transparency and citizen engagement in governance."
-  },
-  {
     "name": "Open Government, Netherlands",
     "link": "https://data.overheid.nl/en/ondersteuning/data-publiceren/api",
     "description": "Netherlands Government Open Data",
@@ -11568,16 +11478,6 @@
     "detailedDescription": "- **Purpose:** Provides data on the spread, infection rates, and recovery statistics related to Covid-19.\n- **Data Coverage:** Includes global metrics and trends to understand the pandemic's impact.\n- **Usage:** Ideal for researchers, health organizations, and policymakers for informed decision-making.",
     "description_fr": "Cas, décès et récupération du Covid-19 par pays",
     "detailedDescription_fr": "- **But :** Offre des statistiques détaillées sur les cas, les décès et les récupérations du Covid-19 classées par pays.\n- **Aperçus des données :** Permet de comparer les effets de la pandémie à travers différentes nations.\n- **Utilisation :** Utile pour les épidémiologistes et les responsables de la santé publique pour suivre et analyser les tendances de santé mondiales."
-  },
-  {
-    "name": "Covid-19",
-    "link": "https://github.com/M-Media-Group/Covid-19-API",
-    "description": "Covid 19 cases, deaths and recovery per country",
-    "auth": "No",
-    "https": "Yes",
-    "cors": "Yes",
-    "category": "Health",
-    "detailedDescription": "- **Purpose:** Offers detailed statistics on Covid-19 cases, deaths, and recoveries categorized by country.\n- **Data Insights:** Enables comparison of pandemic effects across different nations.\n- **Usage:** Useful for epidemiologists and public health officials to track and analyze global health trends."
   },
   {
     "name": "Covid-19 Datenhub",
@@ -13008,16 +12908,6 @@
     "detailedDescription_fr": "- **But :** Génération musicale pilotée par IA.\n- **Modèle :** Utilise Suno pour créer des pistes audio uniques.\n- **Tarification :** Fonctionne sur un système de crédits à la consommation."
   },
   {
-    "name": "TasteDive",
-    "link": "https://tastedive.com/read/api",
-    "description": "Similar artist API (also works for movies and TV shows)",
-    "auth": "apiKey",
-    "https": "Yes",
-    "cors": "Unknown",
-    "category": "Music",
-    "detailedDescription": "- **Purpose:** Discover similar artists, movies, and TV shows.\n- **Functionality:** Provides recommendations based on user preferences.\n- **Versatility:** Supports multiple media types for broader exploration."
-  },
-  {
     "name": "TheAudioDB",
     "link": "https://www.theaudiodb.com/api_guide.php",
     "description": "Music",
@@ -14431,16 +14321,6 @@
     "detailedDescription_fr": "- **But :** Offre des services de validation de numéro de téléphone pour garantir l'exactitude.\n- **Fonctionnalités :** Fournit une validation en temps réel et un formatage des numéros de téléphone.\n- **Intégration :** Intégration API simple pour les applications nécessitant des vérifications de numéros de téléphone.\n- **Utilisation :** Idéal pour les plateformes de commerce électronique et de marketing pour réduire la fraude."
   },
   {
-    "name": "Cloudmersive Validate",
-    "link": "https://cloudmersive.com/phone-number-validation-API",
-    "description": "Validate international phone numbers",
-    "auth": "apiKey",
-    "https": "Yes",
-    "cors": "Yes",
-    "category": "Phone",
-    "detailedDescription": "- **Purpose:** Validate international phone numbers for accuracy and format.\n- **Functionality:** Supports various international formats and ensures compliance with local standards.\n- **Integration:** Easily integrates into applications via RESTful API for seamless validation.\n- **Use Cases:** Ideal for user registration, contact management, and data cleansing."
-  },
-  {
     "name": "Phone Specification",
     "link": "https://github.com/azharimm/phone-specs-api",
     "description": "Rest Api for Phone specifications",
@@ -15149,16 +15029,6 @@
     "detailedDescription_fr": "- **But :** Fournit des faits intéressants et des anecdotes sur divers nombres.\n- **Applications :** Utile à des fins éducatives, pour des quiz et pour améliorer les connaissances mathématiques.\n- **Types de données :** Comprend des propriétés telles que le statut de nombre premier, la divisibilité et la signification historique.\n- **Intégration :** Peut être facilement intégré dans des applications et des sites web pour un contenu dynamique."
   },
   {
-    "name": "Numbers",
-    "link": "http://numbersapi.com",
-    "description": "Facts about numbers",
-    "auth": "No",
-    "https": "No",
-    "cors": "No",
-    "category": "Science & Math",
-    "detailedDescription": "- **Purpose:** Provides interesting facts and trivia about various numbers.\n- **Applications:** Useful for educational purposes, quizzes, and enhancing mathematical knowledge.\n- **Data Types:** Includes properties like prime status, divisibility, and historical significance.\n- **Integration:** Can be easily integrated into apps and websites for dynamic content."
-  },
-  {
     "name": "Ocean Facts",
     "link": "https://oceanfacts.herokuapp.com/",
     "description": "Facts pertaining to the physical science of Oceanography",
@@ -15265,16 +15135,6 @@
     "detailedDescription": "- **Purpose:** Provides detailed information on SpaceX operations.\n- **Data Types:** Includes company, vehicle, launchpad, and launch data.\n- **Integration:** Useful for space enthusiasts and developers in aerospace applications.",
     "description_fr": "GraphQL, entreprise, navires, données de site de lancement et de lancement",
     "detailedDescription_fr": "- **But :** Fournit un accès aux données de lancement de SpaceX, aux navires et aux informations sur les sites de lancement.\n- **Technologie :** Utilise GraphQL pour une récupération efficace des données.\n- **Types de données :** Comprend des informations détaillées sur les missions, les fusées et les lancements historiques."
-  },
-  {
-    "name": "SpaceX",
-    "link": "https://api.spacex.land/graphql/",
-    "description": "GraphQL, Company, Ships, launchpad and launch data",
-    "auth": "No",
-    "https": "Yes",
-    "cors": "Unknown",
-    "category": "Science & Math",
-    "detailedDescription": "- **Purpose:** Provides access to SpaceX's launch data, ships, and launchpad information.\n- **Technology:** Utilizes GraphQL for efficient data retrieval.\n- **Data Types:** Includes detailed information on missions, rockets, and historical launches."
   },
   {
     "name": "Sunrise and Sunset",
@@ -15899,16 +15759,6 @@
     "detailedDescription": "- **Purpose:** Provides access to UK Police data.\n- **Data Types:** Includes crime statistics, incident reports, and safety information.\n- **Application:** Useful for research, safety assessments, and public awareness.\n- **Compliance:** Adheres to data protection regulations for public information.",
     "description_fr": "Données de la police britannique",
     "detailedDescription_fr": "- **But :** Fournit un accès aux données de la police britannique.\n- **Types de données :** Inclut des statistiques sur la criminalité, des rapports d'incidents et des informations de sécurité.\n- **Application :** Utile pour la recherche, les évaluations de sécurité et la sensibilisation du public.\n- **Conformité :** Respecte les réglementations sur la protection des données pour les informations publiques."
-  },
-  {
-    "name": "URLhaus",
-    "link": "https://urlhaus.abuse.ch/api/",
-    "description": "Database of malicious URLs used for malware distribution",
-    "auth": "No",
-    "https": "Yes",
-    "cors": "Unknown",
-    "category": "Security",
-    "detailedDescription": "- **Purpose:** Maintains a database of malicious URLs.\n- **Focus:** Targets URLs used for malware distribution and cyber threats.\n- **Utility:** Helps in identifying and blocking harmful web content.\n- **Community Driven:** Contributions from security researchers enhance the database."
   },
   {
     "name": "Virushee",
@@ -17420,16 +17270,6 @@
     "detailedDescription_fr": "- **But :** Génère des idées de startups aléatoires pour les entrepreneurs.\n- **Variété d'idées :** Fournit des concepts uniques dans divers secteurs.\n- **Outil d'inspiration :** Aide à stimuler la créativité et l'innovation.\n- **Facilité d'utilisation :** Interface simple pour une génération rapide d'idées."
   },
   {
-    "name": "JSONPlaceholder",
-    "link": "http://jsonplaceholder.typicode.com/",
-    "description": "Fake data for testing and prototyping",
-    "auth": "No",
-    "https": "No",
-    "cors": "Unknown",
-    "category": "Test Data",
-    "detailedDescription": "- **Purpose:** Provides fake data for testing and prototyping.\n- **Endpoints:** Offers RESTful endpoints for posts, comments, users, and more.\n- **Usage:** Ideal for front-end developers needing mock data without backend setup."
-  },
-  {
     "name": "Loripsum",
     "link": "http://loripsum.net/",
     "description": "The \"lorem ipsum\" generator that doesn't suck",
@@ -17896,16 +17736,6 @@
     "detailedDescription": "- **Purpose:** Integration for information and shipment preparation using Correio's services.\n- **Capabilities:** Access to tracking, shipping rates, and service availability.\n- **Use Cases:** Ideal for businesses utilizing Brazilian postal services.",
     "description_fr": "Intégration pour fournir des informations et préparer des expéditions en utilisant les services de Correio",
     "detailedDescription_fr": "- **But :** Intégration pour des informations et la préparation d'expéditions en utilisant les services de Correio.\n- **Fonctionnalités :** Accès au suivi, aux tarifs d'expédition et à la disponibilité des services.\n- **Cas d'utilisation :** Idéal pour les entreprises utilisant les services postaux brésiliens."
-  },
-  {
-    "name": "Mapbox",
-    "link": "https://docs.mapbox.com/api/",
-    "description": "Maps, directions, geocoding",
-    "auth": "apiKey",
-    "https": "Yes",
-    "cors": "Unknown",
-    "category": "Tracking",
-    "detailedDescription": "- **Purpose:** Provides mapping, geocoding, and routing services.\n- **Features:** Customizable maps, real-time directions, and location data.\n- **Use Cases:** Ideal for applications requiring location-based services and navigation.\n- **Integration:** Easily integrates with web and mobile applications via SDKs."
   },
   {
     "name": "Pixela",
@@ -18784,30 +18614,11 @@
     "detailedDescription_fr": "- **But :** API de transport public suisse pour accéder aux données de transit.\n- **Fonctionnalités :** Mises à jour en temps réel sur les horaires, les itinéraires et les changements de service.\n- **Utilisation :** Conçu pour les développeurs construisant des applications liées au transport en Suisse.\n- **Format de données :** Prend en charge plusieurs formats de données pour une intégration facile dans diverses plateformes."
   },
   {
-    "name": "Transport for Switzerland",
-    "link": "https://transport.opendata.ch/",
-    "description": "Swiss public transport API",
-    "auth": "No",
-    "https": "Yes",
-    "cors": "Unknown",
-    "category": "Transportation",
-    "detailedDescription": "- **Purpose:** Swiss public transport API for accessing transit data.\n- **Features:** Real-time updates on schedules, routes, and service changes.\n- **Usage:** Designed for developers building transport-related applications in Switzerland.\n- **Data Format:** Supports multiple data formats for easy integration into various platforms."
-  },
-  {
     "name": "Transport for The Netherlands",
     "link": "http://www.ns.nl/reisinformatie/ns-api",
     "description": "NS, only trains",
     "auth": "apiKey",
     "https": "No",
-    "cors": "Unknown",
-    "category": "Transportation"
-  },
-  {
-    "name": "Transport for The Netherlands",
-    "link": "https://github.com/skywave/KV78Turbo-OVAPI/wiki",
-    "description": "OVAPI, country-wide public transport",
-    "auth": "No",
-    "https": "Yes",
     "cors": "Unknown",
     "category": "Transportation"
   },
@@ -19641,16 +19452,6 @@
     "detailedDescription": "- **Purpose:** Offers comprehensive data about the Star Wars universe.\n- **Category:** Video.\n- **Usage:** Useful for developers creating Star Wars-themed applications or games.\n- **Data Types:** Includes characters, starships, planets, and more.",
     "description_fr": "Tout sur Star Wars",
     "detailedDescription_fr": "- **But :** Fournit des informations étendues sur tout ce qui concerne Star Wars.\n- **Catégorie :** Vidéo.\n- **Utilisation :** Parfait pour les passionnés et les développeurs ayant besoin de lore et de statistiques détaillées.\n- **Couverture des données :** Englobe les films, les espèces, les véhicules, et les systèmes stellaires."
-  },
-  {
-    "name": "SWAPI",
-    "link": "https://www.swapi.tech",
-    "description": "All things Star Wars",
-    "auth": "No",
-    "https": "Yes",
-    "cors": "Yes",
-    "category": "Video",
-    "detailedDescription": "- **Purpose:** Provides extensive information on all things Star Wars.\n- **Category:** Video.\n- **Usage:** Perfect for enthusiasts and developers needing detailed lore and statistics.\n- **Data Coverage:** Encompasses movies, species, vehicles, and star systems."
   },
   {
     "name": "SWAPI GraphQL",
